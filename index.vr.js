@@ -6,6 +6,7 @@ import {
   VrButton,
   Text,
   View,
+  Sound,
   Image,
 } from 'react-vr';
 import zens from "./consts/zens.js";
@@ -28,7 +29,9 @@ export default class MeditationApp extends React.Component {
   render() {
     return (
       <View>
-         <Pano source={asset(zens[this.state.selectedZen - 1].image)}/>
+         <Pano source={asset(zens[this.state.selectedZen - 1].image)}>
+          <Sound source={asset(zens[this.state.selectedZen - 1].audio)} />
+         </Pano>
          <HomeButton buttonClick={() => this.zenClicked(4)} />
          { this.state.selectedZen !== 4 ?
           <Mantra text={zens[this.state.selectedZen - 1].mantra} /> :
@@ -39,6 +42,7 @@ export default class MeditationApp extends React.Component {
                   zens.slice(0, 3).map((zen) => {
                     return (
                       <ZenButton
+                        key={zen.id}
                         buttonClick={() => this.zenClicked(zen.id)}
                         text={zen.text}
                       />

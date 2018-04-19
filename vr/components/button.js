@@ -11,7 +11,7 @@ const Button = (props) => {
         <VrButton
           onClick={props.buttonClick}
           style={{width: 1.0}}>
-          <View style={{ margin: 0.1, height: 0.3, backgroundColor: '#CF3C7E'}}>
+          <View style={{ margin: 0.1, height: 0.2, backgroundColor: '#CF3C7E'}}>
             <Text
               style={{
                 backgroundColor: '#29ECCE',

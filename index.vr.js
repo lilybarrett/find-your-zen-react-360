@@ -24,7 +24,6 @@ export default class MeditationApp extends React.Component {
   zenClicked(zen) {
     let newZen = zen;
     console.log(newZen);
-    debugger;
     this.setState({ selectedZen: newZen });
   }
 

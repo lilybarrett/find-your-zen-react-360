@@ -17,7 +17,7 @@ const MeditationApp = compose(
     withState('selectedZen', 'zenClicked', 4),
     withHandlers({
       zenClicked: (props) => (id, evt) => props.zenClicked(selectedZen => id)
-    })
+    }),
   )(({
     selectedZen,
     zenClicked
@@ -28,22 +28,22 @@ const MeditationApp = compose(
       </Pano>
       <HomeButton buttonClick={() => zenClicked(4)} />
       { selectedZen !== 4 ?
-      <Mantra text={zens[selectedZen - 1].mantra} /> :
-      <View>
-        <Title>Choose your zen</Title>
+        <Mantra text={zens[selectedZen - 1].mantra} /> :
         <View>
-          {
-              zens.slice(0, 3).map((zen) => {
-                return (
-                  <ZenButton
-                    key={zen.id}
-                    buttonClick={() => zenClicked(zen.id)}
-                    text={zen.text}
-                  />
-                )
-            })
-          }
-        </View>
+          <Title>Choose your zen</Title>
+          <View>
+            {
+                zens.slice(0, 3).map((zen) => {
+                  return (
+                    <ZenButton
+                      key={zen.id}
+                      buttonClick={() => zenClicked(zen.id)}
+                      text={zen.text}
+                    />
+                  )
+              })
+            }
+          </View>
       </View>
       }
   </View>

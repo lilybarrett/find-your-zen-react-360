@@ -1,11 +1,11 @@
 const zens = [
-    {   mantra: "Ohm",
+    {   mantra: "Find your inner motherforking peace",
         image: "hawaii_beach.jpg"
     },
-    {   mantra: "Ohm ",
+    {   mantra: "Breathe in peace, breathe out bullshirt",
         image: "horseshoe_bend.jpg"
     },
-    {   mantra: "Ohm Paris",
+    {   mantra: "Benches will be benches",
         image: "sunrise_paris_2.jpg"
     },
     {   mantra: "",

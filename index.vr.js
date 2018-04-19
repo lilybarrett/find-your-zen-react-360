@@ -31,7 +31,22 @@ export default class MeditationApp extends React.Component {
     return (
       <View>
          <Pano source={asset(zens[this.state.selectedZen].image)}/>
-         { this.state.selectedZen !== 3 ? null :
+         { this.state.selectedZen !== 3 ?
+          <Text
+            style={{
+              backgroundColor: 'transparent',
+              color: 'lightcyan',
+              fontSize: 0.3,
+              fontWeight: '500',
+              layoutOrigin: [0.5, 0.5],
+              paddingLeft: 0.2,
+              paddingRight: 0.2,
+              textAlign: 'center',
+              textAlignVertical: 'center',
+              transform: [{translate: [0, 0, -3]}],
+          }}>
+            {zens[this.state.selectedZen].mantra}
+          </Text> :
           <View>
             <View>
               <Text

@@ -10,7 +10,7 @@ import {
   Image,
 } from 'react-vr';
 import zens from "./consts/zens.js";
-import { ZenButton, Mantra, Title, HomeButton } from "./components/index.js";
+import { Audio, ZenButton, Mantra, Title, HomeButton } from "./components/index.js";
 import { withState, withHandlers, compose } from "recompose";
 
 const MeditationApp = compose(
@@ -24,7 +24,7 @@ const MeditationApp = compose(
   }) => (
     <View>
       <Pano source={asset(zens[selectedZen - 1].image)}>
-      <Sound source={asset(zens[selectedZen - 1].audio)} />
+      <Audio url={asset(zens[selectedZen - 1].audio)} />
       </Pano>
       <HomeButton buttonClick={() => zenClicked(4)} />
       { selectedZen !== 4 ?

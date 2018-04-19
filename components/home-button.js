@@ -5,8 +5,7 @@ import {
   View,
 } from 'react-vr';
 
-const Button = (props) => {
-    const { text } = props;
+const HomeButton = (props) => {
     return (
         <VrButton
           onClick={props.buttonClick}
@@ -14,7 +13,8 @@ const Button = (props) => {
           <View style={{ margin: 0.1, height: 0.2, backgroundColor: '#CF3C7E'}}>
             <Text
               style={{
-                backgroundColor: '#29ECCE',
+                backgroundColor: 'white',
+                color: '#29ECCE',
                 fontSize: 0.07,
                 marginTop: 0.05,
                 layoutOrigin: [0.5, 0.5],
@@ -23,11 +23,11 @@ const Button = (props) => {
                 textAlignVertical: 'center',
                 transform: [{translate: [0, 0, -3]}],
             }}>
-              {text}
+              Home
             </Text>
           </View>
         </VrButton>
     )
 }
 
-export default Button;
+export default HomeButton;

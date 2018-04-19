@@ -8,17 +8,15 @@ import {
   View,
   Image,
 } from 'react-vr';
-import zens from "./vr/consts/zens.js";
-import Button from "./vr/components/button.js";
+import zens from "./consts/zens.js";
+import { ZenButton, Mantra, Title, HomeButton } from "./components/index.js";
 
 export default class MeditationApp extends React.Component {
  constructor () {
    super();
    this.state = {
-    selectedZen: 3,
+    selectedZen: 4,
    }
-
-   this.zenClicked = this.zenClicked.bind(this);
  }
 
   zenClicked(zen) {
@@ -30,44 +28,23 @@ export default class MeditationApp extends React.Component {
   render() {
     return (
       <View>
-         <Pano source={asset(zens[this.state.selectedZen].image)}/>
-         { this.state.selectedZen !== 3 ?
-          <Text
-            style={{
-              backgroundColor: 'transparent',
-              color: 'lightcyan',
-              fontSize: 0.3,
-              fontWeight: '500',
-              layoutOrigin: [0.5, 0.5],
-              paddingLeft: 0.2,
-              paddingRight: 0.2,
-              textAlign: 'center',
-              textAlignVertical: 'center',
-              transform: [{translate: [0, 0, -3]}],
-          }}>
-            {zens[this.state.selectedZen].mantra}
-          </Text> :
+         <Pano source={asset(zens[this.state.selectedZen - 1].image)}/>
+         <HomeButton buttonClick={() => this.zenClicked(4)} />
+         { this.state.selectedZen !== 4 ?
+          <Mantra text={zens[this.state.selectedZen - 1].mantra} /> :
           <View>
+            <Title>Choose your zen</Title>
             <View>
-              <Text
-                  style={{
-                    backgroundColor: '#29ECCE',
-                    fontSize: 0.2,
-                    fontWeight: '400',
-                    layoutOrigin: [0.5, 0.5],
-                    paddingLeft: 0.2,
-                    paddingRight: 0.2,
-                    textAlign: 'center',
-                    textAlignVertical: 'center',
-                    transform: [{translate: [0, 0, -3]}],
-                }}>
-                Choose your zen
-              </Text>
-            </View>
-            <View>
-              <Button buttonClick={() => this.zenClicked(0)} text="I'm feeling beachy keen" />
-              <Button buttonClick={() => this.zenClicked(1)} text="Ain't no mountain high enough" />
-              <Button buttonClick={() => this.zenClicked(2)} text="I want a baguette" />
+              {
+                  zens.slice(0, 3).map((zen) => {
+                    return (
+                      <ZenButton
+                        buttonClick={() => this.zenClicked(zen.id)}
+                        text={zen.text}
+                      />
+                    )
+                })
+              }
             </View>
           </View>
          }

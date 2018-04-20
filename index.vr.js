@@ -27,8 +27,8 @@ const MeditationApp = compose(
       <Audio url={asset(zens[selectedZen - 1].audio)} />
       </Pano>
       <HomeButton buttonClick={() => zenClicked(4)} />
-      {/* { selectedZen !== 4 ? */}
-        <Mantra text={zens[selectedZen - 1].mantra} />
+      { selectedZen !== 4 ?
+        <Mantra text={zens[selectedZen - 1].mantra} /> :
         <Menu selectedZen={selectedZen}>
           <Title>Choose your zen</Title>
           <View>
@@ -45,7 +45,7 @@ const MeditationApp = compose(
             }
           </View>
       </Menu>
-      {/* } */}
+      }
   </View>
 ));
 

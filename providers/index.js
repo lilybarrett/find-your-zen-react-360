@@ -1,5 +1,5 @@
-import hideIfNotHome from "./hideIfNotHome.js";
+import hideIf from "./hideIf.js";
 
 export {
-    hideIfNotHome,
+    hideIf,
 }

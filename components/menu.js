@@ -1,14 +1,16 @@
 import React from "react";
-import { hideIfNotHome } from "../providers/index.js";
+import { hideIf } from "../providers/index.js";
 import { compose } from "recompose";
-import { View } from "react-vr";
+import { View, Text } from "react-vr";
+
+const hideMenu = hideIf((props) => props.selectedZen !== 4);
 
 export default compose(
-    hideIfNotHome(props => props.selectedZen !== 4)
-)(({
-    children
-}) => (
-    <View>
-        {children}
-    </View>
-));
+    hideMenu,
+)((props) => {
+    return (
+        <View>
+            {props.children}
+        </View>
+    )
+});

@@ -59,7 +59,7 @@ Take a look at the file structure.
 
 Delete the chess image from `static_assets` and replace it with some new images, including your "homebase" image, the one that appears when the app loads.
 
-A tip (Thank you, [Coding Artist](https://medium.com/coding-artist/learn-react-vr-chapter-1-hello-virtual-world-202241c0cb63)!): Search for "equirectangular" photos on Google. [Flickr](https://www.flickr.com/) is a particularly good course of free, Creative Commons-licensed, high-quality panoramic photos.
+A tip (Thank you, [Coding Artist](https://medium.com/coding-artist/learn-react-vr-chapter-1-hello-virtual-world-202241c0cb63)!): Search for "equirectangular" photos on Google. [Flickr](https://www.flickr.com/) is a particularly good source of free, Creative Commons-licensed, high-quality panoramic photos.
 
 Create an `images` folder in your `static_assets` and move your images in there. Update the `Pano` component to refer to the "homebase" image for now.
 

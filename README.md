@@ -190,11 +190,11 @@ A note about `withHandlers` and performance optimization: `withHandlers` passes 
 
 ### Hiding elements with [`branch`](https://github.com/acdlite/recompose/blob/master/docs/API.md#branch) and [`renderNothing`](https://github.com/acdlite/recompose/blob/master/docs/API.md#rendernothing) 
 
-But what about that ternary operator/if-else logic that either renders the "homebase" menu or an environment-based `Mantra`? And what about that edge case I just thought of, in which I want to render the `Home` button _only_ when we are in an environment other than "homebase"? What about that annoying 404 error I see in my console when I'm in the "homebase" environment, regarding a nonexistent audio file? 
+This is lookin' good! But what about that ternary operator/`if ... else`-like logic that either renders the "homebase" menu or an environment-based `Mantra`? And what about that edge case I just thought of, in which I want to render the `Home` button _only_ when we are in an environment other than "homebase"? What about that annoying 404 error I see in my console when I'm in the "homebase" environment, regarding a nonexistent audio file? 
 
 I could keep adding ternary operators for my rendering logic, which is _fine_ and it _works_, but I'm more interested in extracting the logic from components' render methods and putting it an HOC instead, which would be more functional and allow each component to be more individually focused on its own render logic. Recompose comes to the rescue again! 
 
-Rather than using `if` or ternary operators, I can use Recompose's `branch` utility, which accepts a callback as an argument and returns one (or one of two) higher order components based on whether the callback function returns `true` or `false`. If I want the component to simply not display, given a certain condition, I can use Recompose's `renderNothing`, which will do exactly what it sounds like. Beautiful!
+Rather than using `if ... else` or ternary operators, I can use Recompose's `branch` utility, which accepts a callback as an argument and returns one (or one of two) higher order components based on whether the callback function returns `true` or `false`. If I want the component to simply not display, given a certain condition, I can use Recompose's `renderNothing`, which will do exactly what it sounds like. Beautiful!
 
 In my case. I set up a generic `hideIf` provider (see `providers` folder):
 
@@ -314,7 +314,7 @@ After implementing similar logic for my `HomeButton` and `Sound` components, I g
 
 If I wanted each component to be less dependent on props being passed down to it, I could implement some more Redux-like logic using Recompose's [`withReducer`](https://github.com/acdlite/recompose/blob/master/docs/API.md#withreducer), [`getContext`](https://github.com/acdlite/recompose/blob/master/docs/API.md#getcontext) and [`withContext`](https://github.com/acdlite/recompose/blob/master/docs/API.md#withcontext) utilities. 
 
-Recompose also comes with `mapProps`, which works similarly to Redux's `mapStateToProps`, and a `lifecycle` utility for adding lifecyclem methods such as `componentDidMount` to functional components.
+Recompose also comes with [`mapProps`](https://github.com/acdlite/recompose/blob/master/docs/API.md#mapprops), which works similarly to React-Redux's [`mapStateToProps`](https://learn.co/lessons/map-state-to-props-readme), and a [`lifecycle`](https://github.com/acdlite/recompose/blob/master/docs/API.md#lifecycle) utility for adding lifecycle methods such as [`componentDidMount`](https://reactjs.org/docs/react-component.html#componentdidmount) to functional components.
 
 ### Useful React VR resources and tutorials
 

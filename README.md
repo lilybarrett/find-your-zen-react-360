@@ -75,17 +75,7 @@ Note that the button text -- and, really, any text in the application -- needs t
 
 Now, you'll need to add logic for updating the user's environment based on which option they choose (perhaps by clicking on a `VrButton` component). I'll leave this open-ended because...wait for the best part...this is just [React](https://reactjs.org/)! State management works exactly the same way. You can use local state, [Redux](https://redux.js.org/), etc. In my case, I used [Recompose](https://github.com/acdlite/recompose) (scroll down for more on that).
 
-### Step 6
-
-You don't really feel like you're at the beach unless you hear the sound of waves.
-
-A good source of free and Creative Commons-licensed audio is [Freesound](https://freesound.org/). You'll have to make an account, but it's quick and easy. They'll ask you to complete a survey along the way, but you can just skip it.
-
-After downloading the sounds -- many of which have large `.wav` files -- you'll want to compress the files. I used [All2MP3](https://all2mp3.en.softonic.com/mac), which was easy to install and worked like a dream to turn my `.wav` files into more manageable `.mp3` files, which I then added to a `sounds` folder in my `static_assets`.
-
-You'll then add each sound link to a `Sound` component, which takes a `source` prop, the value of which -- like `Pano` -- wraps the link in an `asset` utility, allowing us to automatically look inside our `static_assets` folder for the resources we need.
-
-For this demo, I wound up putting my data for each environment in a `consts/zens.js` file:
+For my purposes, I wound up putting my data for each environment in a `consts/zens.js` file:
 
 ```
 const zens = [
@@ -115,6 +105,16 @@ const zens = [
 
 export default zens;
 ```
+
+### Step 6
+
+You don't really feel like you're at the beach unless you hear the sound of waves.
+
+A good source of free and Creative Commons-licensed audio is [Freesound](https://freesound.org/). You'll have to make an account, but it's quick and easy. They'll ask you to complete a survey along the way, but you can just skip it.
+
+After downloading the sounds -- many of which have large `.wav` files -- you'll want to compress the files. I used [All2MP3](https://all2mp3.en.softonic.com/mac), which was easy to install and worked like a dream to turn my `.wav` files into more manageable `.mp3` files, which I then added to a `sounds` folder in my `static_assets`.
+
+You'll then add each sound link to a `Sound` component, which takes a `source` prop, the value of which -- like `Pano` -- wraps the link in an `asset` utility, allowing us to automatically look inside our `static_assets` folder for the resources we need.
 
 ### Debugging React VR
 

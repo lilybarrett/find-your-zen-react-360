@@ -1,5 +1,5 @@
-import React from "react";
-import { View, Text } from "react-vr";
+import React from 'react';
+import { View, Text } from 'react-vr';
 
 const Title = () => {
     return (

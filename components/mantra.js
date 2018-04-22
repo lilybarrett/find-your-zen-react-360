@@ -1,7 +1,13 @@
 import React from 'react';
 import { Text } from 'react-vr';
+import { hideIf } from '../providers/index.js';
+import { compose } from 'recompose';
 
-const Mantra = (props) => {
+const hideMantra = hideIf((props) => props.text === null || props.text === undefined || props.text.length === 0);
+
+export default compose(
+    hideMantra,
+)((props) => {
     const { text } = props;
     return (
         <Text
@@ -20,6 +26,4 @@ const Mantra = (props) => {
             {text}
         </Text>
     )
-}
-
-export default Mantra;
+});

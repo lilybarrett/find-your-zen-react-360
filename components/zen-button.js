@@ -11,21 +11,22 @@ const ZenButton = (props) => {
         <VrButton
           onClick={props.buttonClick}
           style={{width: 1.0}}>
-          <View style={{ margin: 0.1, height: 0.2, backgroundColor: '#CF3C7E'}}>
             <Text
               style={{
                 backgroundColor: '#29ECCE',
                 fontSize: 0.07,
-                marginTop: 0.05,
+                marginTop: 0.03,
+                flexDirection: "column",
+                alignItems: "stretch",
+                justifyContent: "flex-start",
                 layoutOrigin: [0.5, 0.5],
                 fontWeight: '400',
                 textAlign: 'center',
                 textAlignVertical: 'center',
-                transform: [{translate: [0, 0, -3]}],
+                transform: [{translate: [0, 0, -1]}],
             }}>
               {text}
             </Text>
-          </View>
         </VrButton>
     )
 }

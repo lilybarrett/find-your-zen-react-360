@@ -24,28 +24,26 @@ const MeditationApp = compose(
   }) => (
     <View>
       <Pano source={asset(zens[selectedZen - 1].image)}>
-      <Audio url={asset(zens[selectedZen - 1].audio)} />
+        <Audio url={zens[selectedZen - 1].audio} />
       </Pano>
-      <HomeButton buttonClick={() => zenClicked(4)} />
-      { selectedZen !== 4 ?
-        <Mantra text={zens[selectedZen - 1].mantra} /> :
-        <Menu selectedZen={selectedZen}>
-          <Title>Choose your zen</Title>
-          <View>
-            {
-                zens.slice(0, 3).map((zen) => {
-                  return (
-                    <ZenButton
-                      key={zen.id}
-                      buttonClick={() => zenClicked(zen.id)}
-                      text={zen.text}
-                    />
-                  )
-              })
-            }
-          </View>
-      </Menu>
-      }
+      <HomeButton selectedZen={selectedZen} buttonClick={() => zenClicked(4)} />
+      <Mantra text={zens[selectedZen - 1].mantra} />
+      <Menu selectedZen={selectedZen}>
+        <Title>Choose your zen</Title>
+        <View>
+          {
+              zens.slice(0, 3).map((zen) => {
+                return (
+                  <ZenButton
+                    key={zen.id}
+                    buttonClick={() => zenClicked(zen.id)}
+                    text={zen.text}
+                  />
+                )
+            })
+          }
+        </View>
+    </Menu>
   </View>
 ));
 

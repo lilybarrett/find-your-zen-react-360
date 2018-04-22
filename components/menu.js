@@ -9,7 +9,7 @@ export default compose(
     hideMenu,
 )((props) => {
     return (
-        <View>
+        <View style={{marginTop: -0.2, height: 0.2}}>
             {props.children}
         </View>
     )

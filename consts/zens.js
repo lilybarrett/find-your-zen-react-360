@@ -18,9 +18,7 @@ const zens = [
         text: "I want a baguette",
     },
     {   id: 4,
-        mantra: "",
         image: "images/homebase.png",
-        audio: "",
         text: "Home"
     }
 ]

@@ -4,8 +4,8 @@ import {
   Text,
   View,
 } from 'react-vr';
-import { compose } from "recompose";
-import { hideIf } from "../providers/index.js";
+import { compose } from 'recompose';
+import { hideIf } from '../providers/index.js';
 
 const hideHomeButton = hideIf((props) => props.selectedZen === 4);
 
@@ -25,9 +25,9 @@ export default compose (
                   marginTop: 0.05,
                   layoutOrigin: [0.5, 0.5],
                   fontWeight: '400',
-                  flexDirection: "column",
-                  alignItems: "stretch",
-                  justifyContent: "flex-start",
+                  flexDirection: 'column',
+                  alignItems: 'stretch',
+                  justifyContent: 'flex-start',
                   textAlign: 'center',
                   textAlignVertical: 'center',
                   transform: [{translate: [0, 0, -3]}],

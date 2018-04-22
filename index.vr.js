@@ -9,9 +9,9 @@ import {
   Sound,
   Image,
 } from 'react-vr';
-import zens from "./consts/zens.js";
-import { Audio, ZenButton, Mantra, Title, Menu, HomeButton } from "./components/index.js";
-import { withState, withHandlers, compose } from "recompose";
+import zens from './consts/zens.js';
+import { Audio, ZenButton, Mantra, Title, Menu, HomeButton } from './components/index.js';
+import { withState, withHandlers, compose } from 'recompose';
 
 const MeditationApp = compose(
     withState('selectedZen', 'zenClicked', 4),
@@ -32,7 +32,7 @@ const MeditationApp = compose(
         <Title>Choose your zen</Title>
         <View>
           {
-              zens.slice(0, 3).map((zen) => {
+              zens.map((zen) => {
                 return (
                   <ZenButton
                     key={zen.id}

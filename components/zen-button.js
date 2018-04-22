@@ -4,11 +4,17 @@ import {
   Text,
   View,
 } from 'react-vr';
+import { hideIf } from "../providers/index.js";
+import { compose } from 'recompose';
 
-const ZenButton = (props) => {
-    const { text } = props;
-    return (
-        <VrButton
+const hideHomeOption = hideIf((props) => props.text === "Home");
+
+export default compose(
+  hideHomeOption,
+)((props) => {
+  const { text } = props;
+  return (
+    <VrButton
           onClick={props.buttonClick}
           style={{width: 1.0}}>
             <Text
@@ -16,9 +22,9 @@ const ZenButton = (props) => {
                 backgroundColor: '#29ECCE',
                 fontSize: 0.07,
                 marginTop: 0.03,
-                flexDirection: "column",
-                alignItems: "stretch",
-                justifyContent: "flex-start",
+                flexDirection: 'column',
+                alignItems: 'stretch',
+                justifyContent: 'flex-start',
                 layoutOrigin: [0.5, 0.5],
                 fontWeight: '400',
                 textAlign: 'center',
@@ -28,7 +34,5 @@ const ZenButton = (props) => {
               {text}
             </Text>
         </VrButton>
-    )
-}
-
-export default ZenButton;
+  )
+});

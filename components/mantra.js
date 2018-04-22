@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text } from 'react-vr';
-import { hideIf } from "../providers/index.js";
-import { compose } from "recompose";
+import { hideIf } from '../providers/index.js';
+import { compose } from 'recompose';
 
 const hideMantra = hideIf((props) => props.text === null || props.text === undefined || props.text.length === 0);
 

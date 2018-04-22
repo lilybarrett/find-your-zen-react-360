@@ -21,7 +21,7 @@ Navigate to http://localhost:8081/vr/index.html.
 * Incorporates [Three.js](https://threejs.org/), [React Native](https://facebook.github.io/react-native/) mobile elements, and [Web VR](https://webvr.info/)
 
 React VR components include:
-- [`View`](https://facebook.github.io/react-native/docs/view.html) - given to us by React Native, used in place of div elements, maps to the view of whatever platform is running the code
+- [`View`](https://facebook.github.io/react-native/docs/view.html) - given to us by React Native, used in place of the `div` elements React typically expects, maps to the view of whatever platform is running the code
 - [`Text`](https://facebook.github.io/react-native/docs/text.html) - given to us by React Native
 - [`Image`](https://facebook.github.io/react-native/docs/image.html) - given to us by React Native
 - [`Pano`](https://facebook.github.io/react-vr/docs/pano.html) - displays 360-degree panoramas

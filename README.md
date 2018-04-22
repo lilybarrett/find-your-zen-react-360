@@ -59,7 +59,7 @@ Take a look at the file structure.
 
 Delete the chess image from `static_assets` and replace it with some new images, including your "homebase" image, the one that appears when the app loads.
 
-A tip (Thank you, [Coding Artist](https://medium.com/coding-artist/learn-react-vr-chapter-1-hello-virtual-world-202241c0cb63)!): Search for "equirectangular" photos on Google. [Flickr](https://www.flickr.com/) is particularly good course of high-quality panoramic photos.
+A tip (Thank you, [Coding Artist](https://medium.com/coding-artist/learn-react-vr-chapter-1-hello-virtual-world-202241c0cb63)!): Search for "equirectangular" photos on Google. [Flickr](https://www.flickr.com/) is a particularly good course of free, Creative Commons-licensed, high-quality panoramic photos.
 
 Create an `images` folder in your `static_assets` and move your images in there. Update the `Pano` component to refer to the "homebase" image for now.
 
@@ -190,11 +190,11 @@ A note about `withHandlers` and performance optimization: `withHandlers` passes 
 
 ### Hiding elements with [`branch`](https://github.com/acdlite/recompose/blob/master/docs/API.md#branch) and [`renderNothing`](https://github.com/acdlite/recompose/blob/master/docs/API.md#rendernothing) 
 
-This is lookin' good! But what about that ternary operator/`if ... else`-like logic that either renders the "homebase" menu or an environment-based `Mantra`? And what about that edge case I just thought of, in which I want to render the `Home` button _only_ when we are in an environment other than "homebase"? What about that annoying 404 error I see in my console when I'm in the "homebase" environment, regarding a nonexistent audio file? 
+This is lookin' good! But what about that ternary operator/`if ... else`-like logic that either renders the "homebase" menu or an environment-based `Mantra`? And what about that edge case I just thought of, in which I want to render the `Home` button _only_ when we are in an environment other than "homebase"? What about that annoying `404` error I see in my console when I'm in the "homebase" environment, regarding a nonexistent audio file? 
 
-I could keep adding ternary operators for my rendering logic, which is _fine_ and it _works_, but I'm more interested in extracting the logic from components' render methods and putting it an HOC instead, which would be more functional and allow each component to be more individually focused on its own render logic. Recompose comes to the rescue again! 
+I could keep adding ternary operators for my rendering logic, which is _fine_ and it _works_, but I'm more interested in extracting the logic from components' render methods and putting it an HOC instead, which would be more functional and allow each component to be more individually focused on its own render logic.
 
-Rather than using `if ... else` or ternary operators, I can use Recompose's `branch` utility, which accepts a callback as an argument and returns one (or one of two) higher order components based on whether the callback function returns `true` or `false`. If I want the component to simply not display, given a certain condition, I can use Recompose's `renderNothing`, which will do exactly what it sounds like. Beautiful!
+Recompose comes to the rescue again! Rather than using `if ... else` or ternary operators, I can use Recompose's `branch` utility, which accepts a callback as an argument and returns one (or one of two) higher order components based on whether the callback function returns `true` or `false`. If I want the component to simply not display, given a certain condition, I can use Recompose's `renderNothing`, which will do exactly what it sounds like. Beautiful!
 
 In my case. I set up a generic `hideIf` provider (see `providers` folder):
 

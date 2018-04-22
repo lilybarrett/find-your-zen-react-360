@@ -4,7 +4,7 @@
 
 FindYourZen is a VR app created using [React VR](https://facebook.github.io/react-vr/) and [Recompose](https://github.com/acdlite/recompose/blob/master/docs/API.md) that allows the user to choose his or her meditation environment (each of which comes with its own background sounds and a mantra inspired by ["The Good Place"](https://www.nbc.com/the-good-place?nbc=1)).
 
-## Getting Started
+## Viewing the finished code 
 
 ```
 $ git clone https://github.com/lilybarrett/find-your-zen.git
@@ -20,7 +20,7 @@ Navigate to http://localhost:8081/vr/index.html.
 * Open source, built by [Facebook](https://github.com/facebook)
 * Incorporates [Three.js](https://threejs.org/), [React Native](https://facebook.github.io/react-native/) mobile elements, and [Web VR](https://webvr.info/)
 
-React VR components include:
+React VR components include (among others):
 - [`View`](https://facebook.github.io/react-native/docs/view.html) - given to us by React Native, used in place of the `div` elements React typically expects, maps to the view of whatever platform is running the code
 - [`Text`](https://facebook.github.io/react-native/docs/text.html) - given to us by React Native
 - [`Image`](https://facebook.github.io/react-native/docs/image.html) - given to us by React Native

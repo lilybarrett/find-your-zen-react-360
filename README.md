@@ -91,7 +91,7 @@ When you `Inspect Element`, you'll see that React VR bundles all its files into 
 
 ### Refactoring with Recompose
 
-I found this project a great opportunity to get comfortable with the [Recompose](https://github.com/acdlite/recompose) library, "a React utility belt for function components and higher-order components" created by [Andrew Clark](https://github.com/acdlite), a front-end engineer at [Facebook](https://github.com/facebook) and co-creator of [Redux](https://redux.js.org/). I'd thought about using Redux for my state management but thought it was a little heavy-handed for this application. And Recompose is also functional programming-friendly!
+I found this project a great opportunity to get comfortable with the [Recompose](https://github.com/acdlite/recompose) library, "a React utility belt for function components and higher-order components" created by [Andrew Clark](https://github.com/acdlite), a front-end engineer at [Facebook](https://github.com/facebook) and co-creator of [Redux](https://redux.js.org/). I'd thought about using Redux for my state management but thought it was a little heavy-handed for this application. And Recompose is also functional programming-friendly, increasing the predictability and composability of React code, reducing weird side effects and mutations, and making the app easier to test. 
 
 ### Using [`withState`](https://github.com/acdlite/recompose/blob/master/docs/API.md#withstate) and [`withHandlers`](https://github.com/acdlite/recompose/blob/master/docs/API.md#withhandlers)
 

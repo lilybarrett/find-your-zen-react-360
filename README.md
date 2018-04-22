@@ -73,7 +73,7 @@ Note that the button text -- and, really, any text in the application -- needs t
 
 ### Step 5 
 
-Now, you'll need to add logic for updating the user's environment based on which option they choose (perhaps by clicking on a `VrButton` component). I'll leave this open-ended because...wait for the best part...this is just React! State management works exactly the same way. You can use local state, Redux, etc. In my case, I used [Recompose](https://github.com/acdlite/recompose) (scroll down for more on that).
+Now, you'll need to add logic for updating the user's environment based on which option they choose (perhaps by clicking on a `VrButton` component). I'll leave this open-ended because...wait for the best part...this is just [React](https://reactjs.org/)! State management works exactly the same way. You can use local state, [Redux](https://redux.js.org/), etc. In my case, I used [Recompose](https://github.com/acdlite/recompose) (scroll down for more on that).
 
 ### Step 6
 
@@ -198,8 +198,8 @@ Rather than using `if ... else` or ternary operators, I can use Recompose's `bra
 
 In my case. I set up a generic `hideIf` provider (see `providers` folder):
 
-providers/hideIf.js
 ```
+// providers/hideIf.js
 import React from 'react';
 import { branch, renderNothing } from 'recompose';
 
@@ -214,8 +214,8 @@ export default hideIf;
 
 Now, for instance, I can create a `Menu` component that wraps the components I want to display in the "homebase" environment and set up a special `hideIf` function for it:
 
-components/menu.js
 ```
+// components/menu.js
 import React from 'react';
 import { hideIf } from '../providers/index.js';
 import { compose } from 'recompose';
@@ -234,8 +234,8 @@ export default compose(
 });
 ```
 
-index.vr.js
 ```
+// index.vr.js
 const MeditationApp = compose(
     withState('selectedZen', 'zenClicked', 4),
     withHandlers({
@@ -275,8 +275,8 @@ Cool, so that takes care of the Menu logic. It appears on the "homebase" page an
 
 But what about my mantras? Easy:
 
-components/mantra.js
 ```
+// components/mantra.js
 import React from 'react';
 import { Text } from 'react-vr';
 import { hideIf } from '../providers/index.js';

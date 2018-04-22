@@ -85,6 +85,37 @@ After downloading the sounds -- many of which have large `.wav` files -- you'll 
 
 You'll then add each sound link to a `Sound` component, which takes a `source` prop, the value of which -- like `Pano` -- wraps the link in an `asset` utility, allowing us to automatically look inside our `static_assets` folder for the resources we need.
 
+For this demo, I wound up putting my data for each environment in a `consts/zens.js` file:
+
+```
+const zens = [
+    {   id: 1,
+        mantra: "Find your inner motherforking peace",
+        image: "images/hawaii_beach.jpg",
+        audio: "sounds/waves.mp3",
+        text: "I'm feeling beachy keen",
+    },
+    {   id: 2,
+        mantra: "Breathe in peace, breathe out bullshirt",
+        image: "images/horseshoe_bend.jpg",
+        audio: "sounds/birds.mp3",
+        text: "Ain't no mountain high enough",
+    },
+    {   id: 3,
+        mantra: "Benches will be benches",
+        image: "images/sunrise_paris_2.jpg",
+        audio: "sounds/chimes.mp3",
+        text: "I want a baguette",
+    },
+    {   id: 4,
+        image: "images/homebase.png",
+        text: "Home"
+    }
+]
+
+export default zens;
+```
+
 ### Debugging React VR
 
 When you `Inspect Element`, you'll see that React VR bundles all its files into one giant blob that isn't super easy to grok. Fortunately, because it supports [sourcemaps](https://trackjs.com/blog/debugging-with-sourcemaps/), we can still access the original files, use `debugger`, etc.

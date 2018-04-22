@@ -98,7 +98,7 @@ I found this project a great opportunity to get comfortable with the [Recompose]
 I was able to convert my `MeditationApp` component in `index.vr.js` to a stateless, functional component from a class component, thanks to Recompose's `withState`. `withState` takes three arguments: the name of the state being updated (in my case, `selectedZen`), the function or handler updating the state (`zenClicked`), and the initial value of `selectedZen` (`4`, the ID for the "homebase" environment).
 
 ```
-// previous component structure
+// previous component structure in index.vr.js
 export default class MeditationApp extends React.Component {
  constructor () {
    super();

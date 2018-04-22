@@ -7,8 +7,8 @@ FindYourZen is a VR app created using [React VR](https://facebook.github.io/reac
 ## Getting Started
 
 ```
-$ git clone https://github.com/lilybarrett/meditation-react-vr.git
-$ cd meditation-react-vr
+$ git clone https://github.com/lilybarrett/find-your-zen.git
+$ cd find-your-zen
 $ npm i
 $ npm start
 ```

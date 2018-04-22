@@ -2,7 +2,7 @@
 
 ## Purpose
 
-FindYourZen is a VR app created using React VR and Recompose that allows the user to choose his or her meditation environment (each of which comes with a mantra inspired by "The Good Place" and its own audio).
+FindYourZen is a VR app created using [React VR](https://facebook.github.io/react-vr/) and [Recompose](https://github.com/acdlite/recompose/blob/master/docs/API.md) that allows the user to choose his or her meditation environment (each of which comes with its own background sounds and a mantra inspired by ["The Good Place"](https://www.nbc.com/the-good-place?nbc=1)).
 
 ## Getting Started
 

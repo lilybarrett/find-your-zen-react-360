@@ -2,7 +2,7 @@
 
 ## Purpose
 
-FindYourZen is a VR app created using React VR and Recompose that allows the user to choose his or her meditation environment (each of which comes with a mantra inspired by "The Good Place").
+FindYourZen is a VR app created using React VR and Recompose that allows the user to choose his or her meditation environment (each of which comes with a mantra inspired by "The Good Place" and its own audio).
 
 ## Getting Started
 
@@ -81,7 +81,7 @@ You don't really feel like you're at the beach unless you hear the sound of wave
 
 A good source of free and Creative Commons-licensed audio is [Freesound](https://freesound.org/). You'll have to make an account, but it's quick and easy. They'll ask you to complete a survey along the way, but you can just skip it.
 
-After downloading the sounds -- many of whch have large `.wav` files -- you'll want to compress the files. I used [All2MP3](https://all2mp3.en.softonic.com/mac), which was easy to install and worked like a dream to turn my `.wav` files into more manageable `.mp3` files, which I then added to a `sounds` folder in my `static_assets`.
+After downloading the sounds -- many of which have large `.wav` files -- you'll want to compress the files. I used [All2MP3](https://all2mp3.en.softonic.com/mac), which was easy to install and worked like a dream to turn my `.wav` files into more manageable `.mp3` files, which I then added to a `sounds` folder in my `static_assets`.
 
 You'll then add each sound link to a `Sound` component, which takes a `source` prop, the value of which -- like `Pano` -- wraps the link in an `asset` utility, allowing us to automatically look inside our `static_assets` folder for the resources we need.
 
@@ -95,7 +95,7 @@ I found this project a great opportunity to get comfortable with the [Recompose]
 
 ### Using [`withState`](https://github.com/acdlite/recompose/blob/master/docs/API.md#withstate) and [`withHandlers`](https://github.com/acdlite/recompose/blob/master/docs/API.md#withhandlers)
 
-I was able to convert my `MeditationApp` component in `index.vr.js` to a stateless, functional component from a class component, thanks to Recompose's `withState`. `withState` takes three arguments: the name of the state being updated (in my case, `selectedZen`), the function or handler updating the state (`zenClicked`), and the initial value of `selectedZen` (`4`, the ID for the homebase environment).
+I was able to convert my `MeditationApp` component in `index.vr.js` to a stateless, functional component from a class component, thanks to Recompose's `withState`. `withState` takes three arguments: the name of the state being updated (in my case, `selectedZen`), the function or handler updating the state (`zenClicked`), and the initial value of `selectedZen` (`4`, the ID for the "homebase" environment).
 
 ```
 // previous component structure
@@ -182,7 +182,7 @@ const MeditationApp = compose(
     ));
 ```
 
-Recompose is all about currying. The result of `withState` curries into `withHandlers`, which, in this case, accepts an object map of handler creators. These creators take a set of props and return a handler to update state. Here, `zenClicked` accepts a `props` argument which returns an `id` to be used as an argument in a curried function that calls `props.zenClicked` (given to us by `withState`) and updates the state of `selectedZen` to the value of `id`. Whew!
+Recompose is all about currying. The result of `withState` curries into `withHandlers`, which accepts an object map of handler creators. Each creator takes a set of props and returns a handler to update state. Here, `zenClicked` accepts a `props` argument which returns an `id` to be used as an argument in a curried function that calls `props.zenClicked` (given to us by `withState`) and updates the state of `selectedZen` to the value of `id`. Whew!
 
 We can then use `selectedZen` and `zenClicked` in our functional component.
 
@@ -190,9 +190,9 @@ A note about `withHandlers` and performance optimization: `withHandlers` passes 
 
 ### Hiding elements with [`branch`](https://github.com/acdlite/recompose/blob/master/docs/API.md#branch) and [`renderNothing`](https://github.com/acdlite/recompose/blob/master/docs/API.md#rendernothing) 
 
-But what about that ternary operator/if-else logic that either renders the menu or a mantra, based on which environment the user finds him or herself in? And what about that edge case I just thought of, in which I want to render the `Home` button _only_ when we are in an environment other than "homebase"? What about that annoying 404 error I see in my console when I'm at "homebase", regarding audio that doesn't exist? 
+But what about that ternary operator/if-else logic that either renders the "homebase" menu or an environment-based `Mantra`? And what about that edge case I just thought of, in which I want to render the `Home` button _only_ when we are in an environment other than "homebase"? What about that annoying 404 error I see in my console when I'm in the "homebase" environment, regarding a nonexistent audio file? 
 
-I could keep adding ternary operators for my rendering logic, which is _fine_ and it _works_, but I'm more interested in extracting the logic from the component's render method and putting it an HOC instead, which would be more functional and allow each component to be more individually focused on its own render logic. Recompose comes to the rescue again! 
+I could keep adding ternary operators for my rendering logic, which is _fine_ and it _works_, but I'm more interested in extracting the logic from components' render methods and putting it an HOC instead, which would be more functional and allow each component to be more individually focused on its own render logic. Recompose comes to the rescue again! 
 
 Rather than using `if` or ternary operators, I can use Recompose's `branch` utility, which accepts a callback as an argument and returns one (or one of two) higher order components based on whether the callback function returns `true` or `false`. If I want the component to simply not display, given a certain condition, I can use Recompose's `renderNothing`, which will do exactly what it sounds like. Beautiful!
 
@@ -212,7 +212,7 @@ const hideIf = (isConditionTrue) =>
 export default hideIf;
 ```
 
-Now, for instance, I can create a `menu` component that wraps the components I want to display in the "homebase" environment and set up a special `hideIf` function for it:
+Now, for instance, I can create a `Menu` component that wraps the components I want to display in the "homebase" environment and set up a special `hideIf` function for it:
 
 components/menu.js
 ```
@@ -271,7 +271,7 @@ const MeditationApp = compose(
 ));
 ```
 
-Cool, so that takes care of the Menu logic. It appears on the "homebase" page and disappears when I navigate to a meditation environment.
+Cool, so that takes care of the Menu logic. It appears on the "homebase" page and disappears when I navigate to a meditation environment, to be replaced with the `Home` button.
 
 But what about my mantras? Easy:
 

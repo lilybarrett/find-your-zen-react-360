@@ -1,4 +1,4 @@
-# React VR with Recompose
+# Find Your Zen: A demo app introducing React VR with Recompose
 
 ## Purpose
 

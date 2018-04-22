@@ -87,7 +87,7 @@ You'll then add each sound link to a `Sound` component, which takes a `source` p
 
 ### Debugging React VR
 
-When you `Inspect Element`, you'll see that React VR bundles all its files into one giant blob that isn't super easy to grok. Fortunately, because it supports [sourcemaps](https://trackjs.com/blog/debugging-with-sourcemaps/), we can still inspect the original files, use `debugger`, etc.
+When you `Inspect Element`, you'll see that React VR bundles all its files into one giant blob that isn't super easy to grok. Fortunately, because it supports [sourcemaps](https://trackjs.com/blog/debugging-with-sourcemaps/), we can still access the original files, use `debugger`, etc.
 
 ### Refactoring with Recompose
 

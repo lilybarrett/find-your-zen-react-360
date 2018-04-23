@@ -4,33 +4,22 @@ import {
   Text,
   View,
 } from 'react-vr';
-import { hideIfHome } from '../providers/index.js';
-import { compose } from 'recompose';
+import { Button } from '../components/index.js';
 
-export default compose(
-  hideIfHome,
-)((props) => {
-  const { text } = props;
+const ZenButton = ({ text, buttonClick, selectedZen }) => {
   return (
-    <VrButton
-          onClick={props.buttonClick}
-          style={{width: 1.0}}>
-            <Text
-              style={{
-                backgroundColor: '#29ECCE',
-                fontSize: 0.07,
-                marginTop: 0.03,
-                flexDirection: 'column',
-                alignItems: 'stretch',
-                justifyContent: 'flex-start',
-                layoutOrigin: [0.5, 0.5],
-                fontWeight: '400',
-                textAlign: 'center',
-                textAlignVertical: 'center',
-                transform: [{translate: [0, 0, -1]}],
-            }}>
-              {text}
-            </Text>
-        </VrButton>
+    <Button
+      text={text}
+      selectedZen={selectedZen}
+      buttonClick={buttonClick}
+      textStyle={{
+        backgroundColor: '#29ECCE',
+        color: 'white',
+        marginTop: 0.03,
+        transform: [{translate: [0, 0, -1]}]
+      }}
+    />
   )
-});
+}
+
+export default ZenButton;

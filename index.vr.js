@@ -35,6 +35,7 @@ const MeditationApp = compose(
               zens.map((zen) => {
                 return (
                   <ZenButton
+                    selectedZen={zen.id}
                     key={zen.id}
                     buttonClick={() => zenClicked(zen.id)}
                     text={zen.text}

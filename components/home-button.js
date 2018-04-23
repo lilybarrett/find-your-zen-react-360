@@ -5,12 +5,10 @@ import {
   View,
 } from 'react-vr';
 import { compose } from 'recompose';
-import { hideIf } from '../providers/index.js';
-
-const hideHomeButton = hideIf((props) => props.selectedZen === 4);
+import { hideIfHome } from '../providers/index.js';
 
 export default compose (
-  hideHomeButton,
+  hideIfHome,
 )((props) => {
   return (
     <VrButton

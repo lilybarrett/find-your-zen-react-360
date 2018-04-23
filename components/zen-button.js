@@ -4,13 +4,11 @@ import {
   Text,
   View,
 } from 'react-vr';
-import { hideIf } from "../providers/index.js";
+import { hideIfHome } from "../providers/index.js";
 import { compose } from 'recompose';
 
-const hideHomeOption = hideIf((props) => props.text === "Home");
-
 export default compose(
-  hideHomeOption,
+  hideIfHome,
 )((props) => {
   const { text } = props;
   return (

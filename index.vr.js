@@ -26,7 +26,9 @@ const MeditationApp = compose(
       <Pano source={asset(zens[selectedZen - 1].image)}>
         <Audio url={zens[selectedZen - 1].audio} />
       </Pano>
-      <HomeButton selectedZen={selectedZen} buttonClick={() => zenClicked(4)} />
+      <View style={{marginBottom: 0.2}}>
+        <HomeButton text={zens[3].text} selectedZen={selectedZen} buttonClick={() => zenClicked(4)} />
+      </View>
       <Mantra text={zens[selectedZen - 1].mantra} />
       <Menu selectedZen={selectedZen}>
         <Title>Choose your zen</Title>

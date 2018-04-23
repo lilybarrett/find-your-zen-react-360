@@ -4,7 +4,7 @@ import {
   Text,
   View,
 } from 'react-vr';
-import { hideIfHome } from "../providers/index.js";
+import { hideIfHome } from '../providers/index.js';
 import { compose } from 'recompose';
 
 export default compose(

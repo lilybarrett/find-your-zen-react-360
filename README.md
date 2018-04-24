@@ -6,7 +6,7 @@ Here, I'll walk you through how I refactored a React app with Recompose and, as 
 
 The project I'll guide you through is a virtual reality app which allows the user to choose his or her immersive meditation environment, each of which comes with its own mantra inspired by the very excellent show ["The Good Place."](https://www.nbc.com/the-good-place?nbc=1) In case you need it for reference, my final source code is [here](https://github.com/lilybarrett/find-your-zen).
 
-This content and more like it are on my blog at [lilydbarrett.com](http://lilydbarrett.com/). 
+This content and more like it are on my blog at [lilydbarrett.com](http://lilydbarrett.com/).
 
 ### About React VR
 
@@ -279,9 +279,9 @@ In my case. I set up a generic `hideIf` provider:
 import React from 'react';
 import { branch, renderNothing } from 'recompose';
 
-const hideIf = (isConditionTrue) =>
+const hideIf = (callback) =>
    branch(
-     isConditionTrue,
+     callback,
      renderNothing,
    );
 

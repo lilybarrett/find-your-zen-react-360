@@ -72,7 +72,7 @@ Now, you'll need to add logic for updating the user's environment based on which
 
 As an FYI, I wound up putting my data for each environment in a `consts/zens.js` file:
 
-```
+```javascript
 const zens = [
   { id: 1,
     mantra: "Find your inner motherforking peace",
@@ -119,7 +119,7 @@ When you `Inspect Element`, you'll see that React VR bundles all its files into 
 
 I found this project a great opportunity to get more comfortable with [Recompose](https://github.com/acdlite/recompose). Recompose is all about [currying](https://www.sitepoint.com/currying-in-functional-javascript/), which basically means that one function takes a series of arguments and returns -- for example -- a function that uses one argument, which returns a function that uses another of the arguments, etc., until all the original arguments are used up. Here's a theoretical example:
 
-```
+```javascript
 const madLibMantraGenerator = function(yogaPhrase, goodPlaceSwear) {
    return function(meditationWord) {
       console.log(yogaPhrase + goodPlaceSwear + meditationWord);
@@ -143,7 +143,7 @@ $ npm i --save recompose
 
 Thanks to Recompose, I was able to convert my `MeditationApp` component in `index.vr.js` to a stateless, functional component from a class component, thanks to Recompose's `withState`. `withState` takes three arguments: the name of the state being updated (in my case, `selectedZen`), the function or handler updating the state (`zenClicked`), and the initial value of `selectedZen` (`4`, the ID for the home environment).
 
-```
+```javascript
 // previous component structure in index.vr.js
 import React from 'react';
 import {
@@ -206,7 +206,7 @@ export default class MeditationApp extends React.Component {
 AppRegistry.registerComponent('MeditationApp', () => MeditationApp);
 ```
 
-```
+```javascript
 // present component structure
 import React from 'react';
 import {
@@ -274,7 +274,7 @@ Recompose comes to the rescue again! Rather than using `if ... else` -- which ca
 
 In my case. I set up a generic `hideIf` provider:
 
-```
+```javascript
 // providers/hideIf.js
 import React from 'react';
 import { branch, renderNothing } from 'recompose';
@@ -290,7 +290,7 @@ export default hideIf;
 
 Now, for instance, I can create a `Menu` component that wraps the components I want to display in the home environment and set up a special `hideIf` function for it:
 
-```
+```javascript
 // components/menu.js
 import React from 'react';
 import { hideIf } from '../providers/index.js';
@@ -310,7 +310,7 @@ export default compose(
 });
 ```
 
-```
+```javascript
 // index.vr.js
 import React from 'react';
 import {
@@ -368,7 +368,7 @@ Cool, so that takes care of the `Menu` logic. It appears in the home environment
 
 What about hiding the `Mantra` component when it doesn't have a value in the `consts/zens.js` file (like in the home environment)? Easy:
 
-```
+```javascript
 // components/mantra.js
 import React from 'react';
 import { Text } from 'react-vr';
@@ -403,7 +403,7 @@ export default compose(
 
 After implementing similar logic for my `HomeButton` component and `Sound` (which becomes a wrapping `Audio`) component, I get the results I want and no longer see any pesky errors in the console!
 
-```
+```javascript
 // components/home-button.js
 import React from 'react';
 import {
@@ -447,7 +447,7 @@ export default compose (
 });
 ```
 
-```
+```javascript
 // components/audio.js
 import React from 'react';
 import { Sound } from 'react-vr';
@@ -469,7 +469,7 @@ export default compose(
 
 I can also implement something similar in my `ZenButton` component to avoid having to `slice` my zens when I map through them in `index.vr.js`:
 
-```
+```javascript
 // components/zen-button.js
 import React from 'react';
 import {
@@ -515,7 +515,7 @@ Hmm, this seems like a code smell: What if the text of the `HomeButton` changes?
 
 I create a top-level `hideIfHome` HOC in my `providers` folder that makes use of the previously created `hideIf`:
 
-```
+```javascript
 import React from 'react';
 import hideIf from './hideIf';
 
@@ -528,7 +528,7 @@ Now I can replace the repetitive providers in both `HomeButton` and `ZenButton` 
 
 Unfortunately, there's still some anti-DRY (Don't Repeat Yourself) logic in both components. Let's create a `components/buttons` folder and set up a `baseButton` that will use the `hideIfHome` provider and set some base styles that both `ZenButton` and `HomeButton` can draw from:
 
-```
+```javascript
 // components/buttons/base-button.js
 import React from 'react';
 import {
@@ -569,7 +569,7 @@ export default compose(
 });
 ```
 
-```
+```javascript
 // component/buttons/zen-button.js
 import React from 'react';
 import {
@@ -598,7 +598,7 @@ const ZenButton = ({ text, buttonClick, selectedZen }) => {
 export default ZenButton;
 ```
 
-```
+```javascript
 // components/buttons/home-button.js
 import React from 'react';
 import {

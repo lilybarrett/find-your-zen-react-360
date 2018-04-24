@@ -4,11 +4,11 @@ import {
   Text,
   View,
 } from 'react-vr';
-import { Button } from '../components/index.js';
+import BaseButton from './base-button.js';
 
 const ZenButton = ({ text, buttonClick, selectedZen }) => {
   return (
-    <Button
+    <BaseButton
       text={text}
       selectedZen={selectedZen}
       buttonClick={buttonClick}

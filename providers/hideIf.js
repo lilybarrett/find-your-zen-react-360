@@ -1,9 +1,9 @@
 import React from 'react';
 import { branch, renderNothing } from 'recompose';
 
-const hideIf = (isConditionTrue) => 
+const hideIf = (callback) =>
     branch(
-        isConditionTrue,
+        callback,
         renderNothing,
     );
 

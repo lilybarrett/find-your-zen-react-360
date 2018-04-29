@@ -1,15 +1,20 @@
 import React from 'react';
 import { Sound } from 'react-vr';
+import zens from '../consts/zens.js';
 import { compose } from 'recompose';
 import { asset } from 'react-vr';
-import { hideIf } from '../providers/index.js';
+import { hideIf, usingAppContext } from '../providers/index.js';
 
-const hideIfNoUrl = hideIf((props) => props.url === null || props.url === undefined || props.url.length === 0);
+const hideIfNoAudioUrl = hideIf(({ selectedZen }) => {
+    const zenAudio = zens[selectedZen - 1].audio;
+    return zenAudio === null || zenAudio === undefined || zenAudio.length === 0;
+});
 
 export default compose(
-    hideIfNoUrl,
-)((props) => {
-    const { url } = props;
+    usingAppContext,
+    hideIfNoAudioUrl,
+)(({ selectedZen }) => {
+    const url = zens[selectedZen - 1].audio;
     return (
         <Sound source={asset(url)} />
     )

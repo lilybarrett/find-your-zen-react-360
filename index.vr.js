@@ -10,43 +10,19 @@ import {
   Image,
 } from 'react-vr';
 import zens from './consts/zens.js';
-import { Audio, ZenButton, Mantra, Title, Menu, HomeButton } from './components/index.js';
+import { Zens, Mantra, Title, Menu, HomeButton, WrappedPano } from './components/index.js';
 import { withState, withHandlers, compose } from 'recompose';
+import { withAppContext } from './providers/index.js';
 
-const MeditationApp = compose(
-    withState('selectedZen', 'zenClicked', 4),
-    withHandlers({
-      zenClicked: (props) => (id, evt) => props.zenClicked(selectedZen => id)
-    }),
-  )(({
-    selectedZen,
-    zenClicked
-  }) => (
+const MeditationApp = withAppContext(() => (
     <View>
-      <Pano source={asset(zens[selectedZen - 1].image)}>
-        <Audio url={zens[selectedZen - 1].audio} />
-      </Pano>
-      <View style={{marginBottom: 0.2}}>
-        <HomeButton text={zens[3].text} selectedZen={selectedZen} buttonClick={() => zenClicked(4)} />
-      </View>
-      <Mantra text={zens[selectedZen - 1].mantra} />
-      <Menu selectedZen={selectedZen}>
-        <Title>Choose your zen</Title>
-        <View>
-          {
-              zens.map((zen) => {
-                return (
-                  <ZenButton
-                    selectedZen={zen.id}
-                    key={zen.id}
-                    buttonClick={() => zenClicked(zen.id)}
-                    text={zen.text}
-                  />
-                )
-            })
-          }
-        </View>
-    </Menu>
+      <WrappedPano />
+      <HomeButton />
+      <Mantra />
+      <Menu>
+          <Title>Choose your zen</Title>
+          <Zens />
+      </Menu>
   </View>
 ));
 

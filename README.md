@@ -628,11 +628,135 @@ export default HomeButton;
 
 Be sure to update your paths for `ZenButton` and `HomeButton` in `components/index.js`.
 
+#### Using [`withContext`](https://github.com/acdlite/recompose/blob/master/docs/API.md#withcontext) and [`getContext`](https://github.com/acdlite/recompose/blob/master/docs/API.md#getcontext)
+
+If you're like me, the fact that you're drilling the same props down through more than one component is making you itchy. Fortunately, there's something we can do about it!
+
+Create a provider called `withStateAndHandlers.js` and move your `withState` and `withHandlers` composition logic in there:
+
+```javascript
+import React from 'react';
+import { withState, withHandlers, compose } from 'recompose';
+
+const withStateAndHandlers = compose(
+    withState('selectedZen', 'zenClicked', 4),
+    withHandlers({
+        zenClicked: (props) => (id, evt) => props.zenClicked(selectedZen => id)
+    }),
+)
+
+export default withStateAndHandlers;
+```
+
+Next, create a `withAppContext` provider:
+
+```javascript
+import { withContext, compose } from 'recompose';
+import * as PropTypes from 'prop-types';
+import withStateAndHandlers from './withStateAndHandlers';
+
+export const AppPropTypes = {
+    selectedZen: PropTypes.number,
+    zenClicked: PropTypes.func,
+}
+
+const AppContext = withContext(
+    AppPropTypes,
+    ({ selectedZen, zenClicked }) => ({
+        selectedZen,
+        zenClicked,
+    })
+);
+
+export default compose(
+    withStateAndHandlers,
+    AppContext,
+);
+```
+
+And a `usingAppContext` provider:
+
+```javascript
+import { getContext } from 'recompose';
+import { AppPropTypes } from "./withAppContext";
+
+export default getContext(AppPropTypes);
+```
+
+Now, you can use the context anywhere you desire within your app. I was able to update my `Pano` component by placing it in a `WrappedPano` component responsible for retrieving its own data via `usingAppContext`:
+
+```javascript
+import React from 'react';
+import { Pano } from 'react-vr';
+import { usingAppContext } from '../providers/index.js';
+import { Audio } from '../components/index.js';
+import zens from '../consts/zens.js';
+import { asset } from 'react-vr';
+
+export default usingAppContext(({ selectedZen }) => {
+    return (
+        <Pano source={asset(zens[selectedZen - 1].image)} >
+            <Audio />
+        </Pano>
+    )
+});
+```
+
+While I _could_ pass the same `selectedZen` prop down to `Audio` here, I'd like to make it similarly self-contained with regards to its data. I refactored it as such:
+
+```javascript
+import React from 'react';
+import { Sound } from 'react-vr';
+import zens from '../consts/zens.js';
+import { compose } from 'recompose';
+import { asset } from 'react-vr';
+import { hideIf, usingAppContext } from '../providers/index.js';
+
+const hideIfNoUrl = hideIf((props) => props.url === null || props.url === undefined || props.url.length === 0);
+
+export default compose(
+    usingAppContext,
+    hideIfNoUrl,
+)(({ selectedZen }) => {
+    const url = zens[selectedZen - 1].audio;
+    return (
+        <Sound source={asset(url)} />
+    )
+});
+```
+
+My updated `index.vr.js` component now is no longer responsible for passing data down to either the `Pano` or the `Audio` components. How refreshing!
+
+```
+import React from 'react';
+import {
+  AppRegistry,
+  asset,
+  Pano,
+  VrButton,
+  Text,
+  View,
+  Sound,
+  Image,
+} from 'react-vr';
+import zens from './consts/zens.js';
+import { ZenButton, Mantra, Title, Menu, HomeButton, WrappedPano } from './components/index.js';
+import { withState, withHandlers, compose } from 'recompose';
+import withAppContext from './providers/withAppContext.js';
+
+const MeditationApp = withAppContext(() => (
+    <View>
+      <WrappedPano />
+      // other stuff here
+  </View>
+));
+
+AppRegistry.registerComponent('MeditationApp', () => MeditationApp);
+```
+
 #### What else can Recompose do?
 
-If you're like me, the fact that you're still passing props down through more than one component is making you itchy. For a more Redux-like approach to state management, look into Recompose's [`withReducer`](https://github.com/acdlite/recompose/blob/master/docs/API.md#withreducer), [`getContext`](https://github.com/acdlite/recompose/blob/master/docs/API.md#getcontext) and [`withContext`](https://github.com/acdlite/recompose/blob/master/docs/API.md#withcontext) utilities. This will be the subject of a future post.
-
-Recompose also comes with [`mapProps`](https://github.com/acdlite/recompose/blob/master/docs/API.md#mapprops), which works similarly to React-Redux's [`mapStateToProps`](https://learn.co/lessons/map-state-to-props-readme), and a [`lifecycle`](https://github.com/acdlite/recompose/blob/master/docs/API.md#lifecycle) utility for adding lifecycle methods such as [`componentDidMount`](https://reactjs.org/docs/react-component.html#componentdidmount) to functional components.
+Recompose also comes with [`withReducer`](https://github.com/acdlite/recompose/blob/master/docs/API.md#withreducer), [`mapProps`](https://github.com/acdlite/recompose/blob/master/docs/API.md#mapprops), which works similarly to React-Redux's [`mapStateToProps`](https://learn.co/lessons/map-state-to-props-readme), and a [`lifecycle`](https://github.com/acdlite/recompose/blob/master/docs/API.md#lifecycle) utility for adding lifecycle methods such as [`componentDidMount`](https://reactjs.org/docs/react-component.html#componentdidmount) to functional components.
 
 #### Viewing the finished demo code
 

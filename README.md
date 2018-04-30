@@ -703,7 +703,7 @@ export default usingAppContext(({ selectedZen }) => {
 });
 ```
 
-While I _could_ pass the same `selectedZen` prop down to `Audio` here, I'd like to make it similarly self-contained with regards to its data. I refactored it as such:
+While I _could_ simply pass the same `selectedZen` prop down to `Audio` here, I'd like to make it similarly self-contained with regards to its data. I refactored it as such:
 
 ```javascript
 // components/audio.js
@@ -732,9 +732,127 @@ export default compose(
 
 You'll notice I was able to change the `hideIf` provider here not to evaluate a `url` prop but to use the `selectedZen` value directly from context.
 
-My updated `index.vr.js` component now is no longer responsible for passing data down to either the `Pano` or the `Audio` components. How refreshing!
+I can then compose `usingAppContext` with other components dependent on the `selectedZen` information -- `Menu`, `Mantra`, and `HomeButton`.
 
+```javascript
+// components/menu.js
+import React from 'react';
+import { hideIf, usingAppContext } from '../providers/index.js';
+import { compose } from 'recompose';
+import { View } from 'react-vr';
+import { Zens, Title } from '../components/index.js';
+
+const hideMenu = hideIf(({ selectedZen }) => selectedZen !== 4);
+
+export default compose(
+    usingAppContext,
+    hideMenu,
+)(({ selectedZen, children }) => {
+    return (
+        <View style={{marginTop: -0.2, height: 0.2}}>
+            { children }
+        </View>
+    )
+});
 ```
+
+```javascript
+// components/mantra.js
+import React from 'react';
+import { Text } from 'react-vr';
+import zens from '../consts/zens.js';
+import { hideIfHome, usingAppContext } from '../providers/index.js';
+import { compose } from 'recompose';
+
+export default compose(
+    usingAppContext,
+    hideIfHome,
+)(({ selectedZen }) => {
+    const text = zens[selectedZen - 1].mantra;
+    return (
+        <Text
+            style={{
+              backgroundColor: 'transparent',
+              color: 'lightcyan',
+              fontSize: 0.3,
+              fontWeight: '500',
+              layoutOrigin: [0.5, 0.5],
+              paddingLeft: 0.2,
+              paddingRight: 0.2,
+              textAlign: 'center',
+              textAlignVertical: 'center',
+              transform: [{translate: [0, 0, -3]}],
+          }}>
+            { text }
+        </Text>
+    )
+});
+```
+
+```javascript
+// components/button/home-button.js 
+import React from 'react';
+import {
+  VrButton,
+  Text,
+  View,
+} from 'react-vr';
+import BaseButton from './base-button.js';
+import { usingAppContext } from '../../providers/index.js';
+import zens from '../../consts/zens.js';
+
+export default usingAppContext(({ selectedZen, zenClicked }) => {
+  return (
+    <View style={{marginBottom: 0.2}}>
+      <BaseButton
+        selectedZen={selectedZen}
+        buttonClick={() => zenClicked(4)}
+        text={zens[3].text}
+        textStyle={{
+          backgroundColor: 'white',
+          color: '#29ECCE',
+          marginTop: 0.05,
+          transform: [{translate: [0, 0, -3]}]}}
+      />
+    </View>
+  )
+});
+```
+
+I can also make the choice to separate the mapping of the `zens` into `ZenButton`s out into its own component, `Zens.js`, which now gets the click handler passed down from context:
+
+```javascript
+// index.vr.js
+import React from 'react';
+import { ZenButton } from '../components/index.js';
+import { usingAppContext } from '../providers/index.js';
+import zens from '../consts/zens.js';
+import { compose } from 'recompose';
+import { View } from 'react-vr';
+
+export default compose(
+    usingAppContext
+)(({ zenClicked }) => {
+    return (
+        <View>
+        {
+            zens.map((zen) => (
+                <ZenButton
+                    selectedZen={zen.id}
+                    key={zen.id}
+                    buttonClick={() => zenClicked(zen.id)}
+                    text={zen.text}
+                />
+            ))
+        }
+    </View>
+    )
+})
+```
+
+My updated `index.vr.js` component now is no longer responsible for passing data down to its child components. How refreshing!
+
+```javascript
 import React from 'react';
 import {
   AppRegistry,
@@ -747,21 +865,24 @@ import {
   Image,
 } from 'react-vr';
 import zens from './consts/zens.js';
-import { ZenButton, Mantra, Title, Menu, HomeButton, WrappedPano } from './components/index.js';
+import { Zens, Mantra, Title, Menu, HomeButton, WrappedPano } from './components/index.js';
 import { withState, withHandlers, compose } from 'recompose';
-import withAppContext from './providers/withAppContext.js';
+import { withAppContext } from './providers/index.js';
 
 const MeditationApp = withAppContext(() => (
     <View>
       <WrappedPano />
-      // other stuff here
+      <HomeButton />
+      <Mantra />
+      <Menu>
+          <Title>Choose your zen</Title>
+          <Zens />
+      </Menu>
   </View>
 ));
 
 AppRegistry.registerComponent('MeditationApp', () => MeditationApp);
 ```
-
-
 
 #### What else can Recompose do?
 

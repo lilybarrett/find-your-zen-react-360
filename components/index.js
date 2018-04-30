@@ -4,6 +4,8 @@ import HomeButton from './buttons/home-button.js';
 import Title from './title.js';
 import Audio from './audio.js';
 import Menu from './menu.js';
+import WrappedPano from './wrapped-pano.js';
+import Zens from './zens.js';
 
 export {
     Mantra,
@@ -12,4 +14,6 @@ export {
     Title,
     Audio,
     Menu,
+    WrappedPano,
+    Zens,
 }

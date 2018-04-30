@@ -1,14 +1,14 @@
 import React from 'react';
 import { Text } from 'react-vr';
-import { hideIf } from '../providers/index.js';
+import zens from '../consts/zens.js';
+import { hideIfHome, usingAppContext } from '../providers/index.js';
 import { compose } from 'recompose';
 
-const hideMantra = hideIf((props) => props.text === null || props.text === undefined || props.text.length === 0);
-
 export default compose(
-    hideMantra,
-)((props) => {
-    const { text } = props;
+    usingAppContext,
+    hideIfHome,
+)(({ selectedZen }) => {
+    const text = zens[selectedZen - 1].mantra;
     return (
         <Text
             style={{
@@ -23,7 +23,7 @@ export default compose(
               textAlignVertical: 'center',
               transform: [{translate: [0, 0, -3]}],
           }}>
-            {text}
+            { text }
         </Text>
     )
 });

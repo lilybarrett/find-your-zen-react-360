@@ -628,11 +628,273 @@ export default HomeButton;
 
 Be sure to update your paths for `ZenButton` and `HomeButton` in `components/index.js`.
 
+#### Using [`withContext`](https://github.com/acdlite/recompose/blob/master/docs/API.md#withcontext) and [`getContext`](https://github.com/acdlite/recompose/blob/master/docs/API.md#getcontext)
+
+If you're like me, the fact that you're drilling the same props down through more than one component is making you itchy. Fortunately, there's something we can do about it!
+
+`withContext`, in conjunction with `getContext`, allows us to easily and cleanly provide context to the children of a component (often the app's main component). `getContext`, used in a child component, allows us to pull out useful information from the parent context and provide it to the component at hand -- No need to drill props down through the app!
+
+Let's first create a provider called `withStateAndHandlers.js` and move your `withState` and `withHandlers` composition logic in there. This will allow us to share state and handlers as part of our context.
+
+```javascript
+// providers/withStateAndHandlers.js
+import React from 'react';
+import { withState, withHandlers, compose } from 'recompose';
+
+const withStateAndHandlers = compose(
+    withState('selectedZen', 'zenClicked', 4),
+    withHandlers({
+        zenClicked: (props) => (id, evt) => props.zenClicked(selectedZen => id)
+    }),
+)
+
+export default withStateAndHandlers;
+```
+
+Next, create a `withAppContext` provider that will use Recompose's `withContext` and our previously defined `withStateAndHandlers`. `withContext` takes in two arguments: an object of React prop types and a function that returns the child context so we can access it as needed.
+
+Note: Recompose requires us to use prop types to define the shape of our app's context data (even if we're already using TypeScript or Flow). 
+
+```javascript
+// providers/withAppContext.js
+import { withContext, compose } from 'recompose';
+import * as PropTypes from 'prop-types';
+import withStateAndHandlers from './withStateAndHandlers';
+
+export const AppPropTypes = {
+    selectedZen: PropTypes.number,
+    zenClicked: PropTypes.func,
+}
+
+const AppContext = withContext(
+    AppPropTypes,
+    ({ selectedZen, zenClicked }) => ({
+        selectedZen,
+        zenClicked,
+    })
+);
+
+export default compose(
+    withStateAndHandlers,
+    AppContext,
+);
+```
+
+And a `usingAppContext` provider which will draw on Recompose's `getContext` and our previously defined prop types.
+
+```javascript
+// providers/usingAppContext.js
+import { getContext } from 'recompose';
+import { AppPropTypes } from "./withAppContext";
+
+export default getContext(AppPropTypes);
+```
+
+Now, you can access the context anywhere you desire within your app. I was able to update my `Pano` component by placing it in a `WrappedPano` component responsible for retrieving its own data via `usingAppContext`:
+
+```javascript
+// components/wrapped-pano.js
+import React from 'react';
+import { Pano } from 'react-vr';
+import { usingAppContext } from '../providers/index.js';
+import { Audio } from '../components/index.js';
+import zens from '../consts/zens.js';
+import { asset } from 'react-vr';
+
+export default usingAppContext(({ selectedZen }) => {
+    return (
+        <Pano source={asset(zens[selectedZen - 1].image)} >
+            <Audio />
+        </Pano>
+    )
+});
+```
+
+While I _could_ simply pass the same `selectedZen` prop down to `Audio` here, I'd like to make it similarly self-contained with regards to its data. I refactored it as such:
+
+```javascript
+// components/audio.js
+import React from 'react';
+import { Sound } from 'react-vr';
+import zens from '../consts/zens.js';
+import { compose } from 'recompose';
+import { asset } from 'react-vr';
+import { hideIf, usingAppContext } from '../providers/index.js';
+
+const hideIfNoAudioUrl = hideIf(({ selectedZen }) => {
+    const zenAudio = zens[selectedZen - 1].audio;
+    return zenAudio === null || zenAudio === undefined || zenAudio.length === 0;
+});
+
+export default compose(
+    usingAppContext,
+    hideIfNoAudioUrl,
+)(({ selectedZen }) => {
+    const zenAudio = zens[selectedZen - 1].audio;
+    return (
+        <Sound source={asset(zenAudio)} />
+    )
+});
+
+```
+
+You'll notice I was able to change the `hideIf` provider here not to evaluate a `url` prop but to use the `selectedZen` value directly from context.
+
+I can then compose `usingAppContext` with other components dependent on the `selectedZen` information -- `Menu`, `Mantra`, and `HomeButton`.
+
+```javascript
+// components/menu.js
+import React from 'react';
+import { hideIf, usingAppContext } from '../providers/index.js';
+import { compose } from 'recompose';
+import { View } from 'react-vr';
+import { Zens, Title } from '../components/index.js';
+
+const hideMenu = hideIf(({ selectedZen }) => selectedZen !== 4);
+
+export default compose(
+    usingAppContext,
+    hideMenu,
+)(({ selectedZen, children }) => {
+    return (
+        <View style={{marginTop: -0.2, height: 0.2}}>
+            { children }
+        </View>
+    )
+});
+```
+
+```javascript
+// components/mantra.js
+import React from 'react';
+import { Text } from 'react-vr';
+import zens from '../consts/zens.js';
+import { hideIfHome, usingAppContext } from '../providers/index.js';
+import { compose } from 'recompose';
+
+export default compose(
+    usingAppContext,
+    hideIfHome,
+)(({ selectedZen }) => {
+    const text = zens[selectedZen - 1].mantra;
+    return (
+        <Text
+            style={{
+              backgroundColor: 'transparent',
+              color: 'lightcyan',
+              fontSize: 0.3,
+              fontWeight: '500',
+              layoutOrigin: [0.5, 0.5],
+              paddingLeft: 0.2,
+              paddingRight: 0.2,
+              textAlign: 'center',
+              textAlignVertical: 'center',
+              transform: [{translate: [0, 0, -3]}],
+          }}>
+            { text }
+        </Text>
+    )
+});
+```
+
+```javascript
+// components/button/home-button.js 
+import React from 'react';
+import {
+  VrButton,
+  Text,
+  View,
+} from 'react-vr';
+import BaseButton from './base-button.js';
+import { usingAppContext } from '../../providers/index.js';
+import zens from '../../consts/zens.js';
+
+export default usingAppContext(({ selectedZen, zenClicked }) => {
+  return (
+    <View style={{marginBottom: 0.2}}>
+      <BaseButton
+        selectedZen={selectedZen}
+        buttonClick={() => zenClicked(4)}
+        text={zens[3].text}
+        textStyle={{
+          backgroundColor: 'white',
+          color: '#29ECCE',
+          marginTop: 0.05,
+          transform: [{translate: [0, 0, -3]}]}}
+      />
+    </View>
+  )
+});
+```
+
+I can also make the choice to separate the mapping of the `zens` into `ZenButton`s out into its own component, `Zens.js`, which now gets the click handler passed down from context:
+
+```javascript
+// index.vr.js
+import React from 'react';
+import { ZenButton } from '../components/index.js';
+import { usingAppContext } from '../providers/index.js';
+import zens from '../consts/zens.js';
+import { compose } from 'recompose';
+import { View } from 'react-vr';
+
+export default compose(
+    usingAppContext
+)(({ zenClicked }) => {
+    return (
+        <View>
+        {
+            zens.map((zen) => (
+                <ZenButton
+                    selectedZen={zen.id}
+                    key={zen.id}
+                    buttonClick={() => zenClicked(zen.id)}
+                    text={zen.text}
+                />
+            ))
+        }
+    </View>
+    )
+})
+```
+
+My updated `index.vr.js` component now is no longer responsible for passing data down to its child components. How refreshing!
+
+```javascript
+import React from 'react';
+import {
+  AppRegistry,
+  asset,
+  Pano,
+  VrButton,
+  Text,
+  View,
+  Sound,
+  Image,
+} from 'react-vr';
+import zens from './consts/zens.js';
+import { Zens, Mantra, Title, Menu, HomeButton, WrappedPano } from './components/index.js';
+import { withState, withHandlers, compose } from 'recompose';
+import { withAppContext } from './providers/index.js';
+
+const MeditationApp = withAppContext(() => (
+    <View>
+      <WrappedPano />
+      <HomeButton />
+      <Mantra />
+      <Menu>
+          <Title>Choose your zen</Title>
+          <Zens />
+      </Menu>
+  </View>
+));
+
+AppRegistry.registerComponent('MeditationApp', () => MeditationApp);
+```
+
 #### What else can Recompose do?
 
-If you're like me, the fact that you're still passing props down through more than one component is making you itchy. For a more Redux-like approach to state management, look into Recompose's [`withReducer`](https://github.com/acdlite/recompose/blob/master/docs/API.md#withreducer), [`getContext`](https://github.com/acdlite/recompose/blob/master/docs/API.md#getcontext) and [`withContext`](https://github.com/acdlite/recompose/blob/master/docs/API.md#withcontext) utilities. This will be the subject of a future post.
-
-Recompose also comes with [`mapProps`](https://github.com/acdlite/recompose/blob/master/docs/API.md#mapprops), which works similarly to React-Redux's [`mapStateToProps`](https://learn.co/lessons/map-state-to-props-readme), and a [`lifecycle`](https://github.com/acdlite/recompose/blob/master/docs/API.md#lifecycle) utility for adding lifecycle methods such as [`componentDidMount`](https://reactjs.org/docs/react-component.html#componentdidmount) to functional components.
+Recompose also comes with [`withReducer`](https://github.com/acdlite/recompose/blob/master/docs/API.md#withreducer), [`mapProps`](https://github.com/acdlite/recompose/blob/master/docs/API.md#mapprops), which works similarly to React-Redux's [`mapStateToProps`](https://learn.co/lessons/map-state-to-props-readme), and a [`lifecycle`](https://github.com/acdlite/recompose/blob/master/docs/API.md#lifecycle) utility for adding lifecycle methods such as [`componentDidMount`](https://reactjs.org/docs/react-component.html#componentdidmount) to functional components.
 
 #### Viewing the finished demo code
 

@@ -712,11 +712,14 @@ import { compose } from 'recompose';
 import { asset } from 'react-vr';
 import { hideIf, usingAppContext } from '../providers/index.js';
 
-const hideIfNoUrl = hideIf((props) => props.url === null || props.url === undefined || props.url.length === 0);
+const hideIfNoAudioUrl = hideIf(({ selectedZen }) => {
+    const zenAudio = zens[selectedZen - 1].audio;
+    return zenAudio === null || zenAudio === undefined || zenAudio.length === 0;
+});
 
 export default compose(
     usingAppContext,
-    hideIfNoUrl,
+    hideIfNoAudioUrl,
 )(({ selectedZen }) => {
     const url = zens[selectedZen - 1].audio;
     return (
@@ -724,6 +727,8 @@ export default compose(
     )
 });
 ```
+
+You'll notice I was able to change the `hideIf` provider here not to evaluate a `url` prop but to use the `selectedZen` value directly from context.
 
 My updated `index.vr.js` component now is no longer responsible for passing data down to either the `Pano` or the `Audio` components. How refreshing!
 

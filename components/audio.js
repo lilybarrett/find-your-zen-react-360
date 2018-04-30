@@ -14,8 +14,8 @@ export default compose(
     usingAppContext,
     hideIfNoAudioUrl,
 )(({ selectedZen }) => {
-    const url = zens[selectedZen - 1].audio;
+    const zenAudio = zens[selectedZen - 1].audio;
     return (
-        <Sound source={asset(url)} />
+        <Sound source={asset(zenAudio)} />
     )
 });

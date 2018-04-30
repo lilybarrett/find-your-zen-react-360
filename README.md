@@ -730,11 +730,12 @@ export default compose(
     usingAppContext,
     hideIfNoAudioUrl,
 )(({ selectedZen }) => {
-    const url = zens[selectedZen - 1].audio;
+    const zenAudio = zens[selectedZen - 1].audio;
     return (
-        <Sound source={asset(url)} />
+        <Sound source={asset(zenAudio)} />
     )
 });
+
 ```
 
 You'll notice I was able to change the `hideIf` provider here not to evaluate a `url` prop but to use the `selectedZen` value directly from context.

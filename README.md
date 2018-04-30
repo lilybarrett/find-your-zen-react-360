@@ -632,9 +632,12 @@ Be sure to update your paths for `ZenButton` and `HomeButton` in `components/ind
 
 If you're like me, the fact that you're drilling the same props down through more than one component is making you itchy. Fortunately, there's something we can do about it!
 
-Create a provider called `withStateAndHandlers.js` and move your `withState` and `withHandlers` composition logic in there:
+`withContext`, in conjunction with `getContext`, allows us to easily and cleanly provide context to the children of a component (often the app's main component). `getContext`, used in a child component, allows us to pull out useful information from the parent context and provide it to the component at hand -- No need to drill props down through the app!
+
+Let's first create a provider called `withStateAndHandlers.js` and move your `withState` and `withHandlers` composition logic in there. This will allow us to share state and handlers as part of our context.
 
 ```javascript
+// providers/withStateAndHandlers.js
 import React from 'react';
 import { withState, withHandlers, compose } from 'recompose';
 
@@ -648,9 +651,12 @@ const withStateAndHandlers = compose(
 export default withStateAndHandlers;
 ```
 
-Next, create a `withAppContext` provider:
+Next, create a `withAppContext` provider that will use Recompose's `withContext` and our previously defined `withStateAndHandlers`. `withContext` takes in two arguments: an object of React prop types and a function that returns the child context so we can access it as needed.
+
+Note: Recompose requires us to use prop types to define the shape of our app's context data (even if we're already using TypeScript or Flow). 
 
 ```javascript
+// providers/withAppContext.js
 import { withContext, compose } from 'recompose';
 import * as PropTypes from 'prop-types';
 import withStateAndHandlers from './withStateAndHandlers';
@@ -674,16 +680,17 @@ export default compose(
 );
 ```
 
-And a `usingAppContext` provider:
+And a `usingAppContext` provider which will draw on Recompose's `getContext` and our previously defined prop types.
 
 ```javascript
+// providers/usingAppContext.js
 import { getContext } from 'recompose';
 import { AppPropTypes } from "./withAppContext";
 
 export default getContext(AppPropTypes);
 ```
 
-Now, you can use the context anywhere you desire within your app. I was able to update my `Pano` component by placing it in a `WrappedPano` component responsible for retrieving its own data via `usingAppContext`:
+Now, you can access the context anywhere you desire within your app. I was able to update my `Pano` component by placing it in a `WrappedPano` component responsible for retrieving its own data via `usingAppContext`:
 
 ```javascript
 // components/wrapped-pano.js

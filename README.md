@@ -686,6 +686,7 @@ export default getContext(AppPropTypes);
 Now, you can use the context anywhere you desire within your app. I was able to update my `Pano` component by placing it in a `WrappedPano` component responsible for retrieving its own data via `usingAppContext`:
 
 ```javascript
+// components/wrapped-pano.js
 import React from 'react';
 import { Pano } from 'react-vr';
 import { usingAppContext } from '../providers/index.js';
@@ -705,6 +706,7 @@ export default usingAppContext(({ selectedZen }) => {
 While I _could_ pass the same `selectedZen` prop down to `Audio` here, I'd like to make it similarly self-contained with regards to its data. I refactored it as such:
 
 ```javascript
+// components/audio.js
 import React from 'react';
 import { Sound } from 'react-vr';
 import zens from '../consts/zens.js';
@@ -758,6 +760,8 @@ const MeditationApp = withAppContext(() => (
 
 AppRegistry.registerComponent('MeditationApp', () => MeditationApp);
 ```
+
+
 
 #### What else can Recompose do?
 

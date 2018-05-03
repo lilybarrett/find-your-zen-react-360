@@ -651,9 +651,11 @@ const withStateAndHandlers = compose(
 export default withStateAndHandlers;
 ```
 
-Next, create a `withAppContext` provider that will use Recompose's `withContext` and our previously defined `withStateAndHandlers`. `withContext` takes in two arguments: an object of React prop types and a function that returns the child context so we can access it as needed.
+Next, create a `withAppContext` provider that will use Recompose's `withContext` and our previously defined `withStateAndHandlers`. `withContext` takes in two arguments: an object of React prop types (`childContextTypes`) and a function that returns the child context (`getChildContext`) so we can access it as needed.
 
-Note: Recompose requires us to use prop types to define the shape of our app's context data (even if we're already using TypeScript or Flow). 
+If you're more familiar with traditional React state management via Redux, Recompose's `withAppContext` essentially allows us to utilize a [Provider](https://blog.kentcdodds.com/advanced-react-component-patterns-56af2b74bc5f) pattern similar to that in [Redux](https://redux.js.org/). We will wind up wrapping our main `MeditationApp` component with our `withAppContext` provider.
+
+Note: Recompose requires us to use prop types to define the shape of our app's context data (even if we're already using TypeScript or Flow).
 
 ```javascript
 // providers/withAppContext.js
@@ -798,7 +800,7 @@ export default compose(
 ```
 
 ```javascript
-// components/button/home-button.js 
+// components/button/home-button.js
 import React from 'react';
 import {
   VrButton,
@@ -891,6 +893,10 @@ const MeditationApp = withAppContext(() => (
 
 AppRegistry.registerComponent('MeditationApp', () => MeditationApp);
 ```
+
+I'm particularly satisfied with Recompose's use of `context` here because it allows me to easily and neatly implement [dependency injection](https://en.wikipedia.org/wiki/Dependency_injection). In other words, I've removed any knowledge of the necessary data and handlers from the components themselves and merely _injected_ them into said components via `usingAppContext`. This decouples the app logic from its components, allowing for easier testing, maintainability, and reusability.
+
+Side note: If I've managed to make you fall in love with `context` but not functional programming (*sad face*), check out this helpful article on the [Context API](https://medium.com/dailyjs/reacts-%EF%B8%8F-new-context-api-70c9fe01596b). Once experimental, it's been officially rolled into the newest React release. Redux's `Provider` draws on this exact API, and it's now stable enough for you to use it safely as a standalone device to help manage/access app state.
 
 #### What else can Recompose do?
 

@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 
-var path = require('path');
-var blacklist = require('metro-bundler/src/blacklist');
+var path = require("path");
+var blacklist = require("metro-bundler/src/blacklist");
 
 var config = {
   getProjectRoots() {
@@ -14,15 +14,15 @@ var config = {
   },
 
   getAssetExts() {
-    return ['obj', 'mtl'];
+    return ["obj", "mtl"];
   },
 
   getPlatforms() {
-    return ['vr'];
+    return ["vr"];
   },
 
   getProvidesModuleNodeModules() {
-    return ['react-native', 'react-vr'];
+    return ["react-native", "react-vr"];
   },
 };
 

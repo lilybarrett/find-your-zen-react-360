@@ -1,9 +1,9 @@
-import React from 'react';
-import { ZenButton } from '../components/index.js';
-import { usingAppContext } from '../providers/index.js';
-import zens from '../consts/zens.js';
-import { compose } from 'recompose';
-import { View } from 'react-vr';
+import React from "react";
+import { ZenButton } from "../components/index.js";
+import { usingAppContext } from "../providers/index.js";
+import zens from "../consts/zens.js";
+import { compose } from "recompose";
+import { View } from "react-vr";
 
 export default compose(
     usingAppContext

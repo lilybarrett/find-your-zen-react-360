@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   AppRegistry,
   asset,
@@ -8,11 +8,11 @@ import {
   View,
   Sound,
   Image,
-} from 'react-vr';
-import zens from './consts/zens.js';
-import { Zens, Mantra, Title, Menu, HomeButton, WrappedPano } from './components/index.js';
-import { withState, withHandlers, compose } from 'recompose';
-import { withAppContext } from './providers/index.js';
+} from "react-vr";
+import zens from "./consts/zens.js";
+import { Zens, Mantra, Title, Menu, HomeButton, WrappedPano } from "./components/index.js";
+import { withState, withHandlers, compose } from "recompose";
+import { withAppContext } from "./providers/index.js";
 
 const MeditationApp = withAppContext(() => (
     <View>
@@ -26,4 +26,4 @@ const MeditationApp = withAppContext(() => (
   </View>
 ));
 
-AppRegistry.registerComponent('MeditationApp', () => MeditationApp);
+AppRegistry.registerComponent("MeditationApp", () => MeditationApp);

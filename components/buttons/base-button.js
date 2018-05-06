@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 import {
   VrButton,
   Text,
   View,
-} from 'react-vr';
-import { compose } from 'recompose';
-import { hideIfHome } from '../../providers/index.js';
+} from "react-vr";
+import { compose } from "recompose";
+import { hideIfHome } from "../../providers/index.js";
 
 export default compose(
   hideIfHome,
@@ -19,13 +19,13 @@ export default compose(
               style={[
                 {
                   fontSize: 0.07,
-                  flexDirection: 'column',
-                  alignItems: 'stretch',
-                  justifyContent: 'flex-start',
+                  flexDirection: "column",
+                  alignItems: "stretch",
+                  justifyContent: "flex-start",
                   layoutOrigin: [0.5, 0.5],
-                  fontWeight: '400',
-                  textAlign: 'center',
-                  textAlignVertical: 'center'
+                  fontWeight: "400",
+                  textAlign: "center",
+                  textAlignVertical: "center"
                 },
                   textStyle,
               ]}>

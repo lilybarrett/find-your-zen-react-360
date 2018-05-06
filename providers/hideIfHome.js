@@ -1,5 +1,5 @@
-import React from 'react';
-import hideIf from './hideIf';
+import React from "react";
+import hideIf from "./hideIf";
 
 const hideIfHome = hideIf((props) => props.selectedZen === 4);
 

@@ -1,8 +1,8 @@
-import React from 'react';
-import { hideIf, usingAppContext } from '../providers/index.js';
-import { compose } from 'recompose';
-import { View } from 'react-vr';
-import { Zens, Title } from '../components/index.js';
+import React from "react";
+import { hideIf, usingAppContext } from "../providers/index.js";
+import { compose } from "recompose";
+import { View } from "react-vr";
+import { Zens, Title } from "../components/index.js";
 
 const hideMenu = hideIf(({ selectedZen }) => selectedZen !== 4);
 

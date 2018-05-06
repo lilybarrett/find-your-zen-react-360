@@ -1,5 +1,5 @@
-import React from 'react';
-import { branch, renderNothing } from 'recompose';
+import React from "react";
+import { branch, renderNothing } from "recompose";
 
 const hideIf = (callback) =>
     branch(

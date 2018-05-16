@@ -3,7 +3,7 @@ import {
   VrButton,
   Text,
   View,
-} from "react-vr";
+} from "react-360";
 import { compose } from "recompose";
 import { hideIfHome } from "../../providers/index.js";
 
@@ -13,24 +13,19 @@ export default compose(
   const { text, textStyle } = props;
   return (
     <VrButton
-          onClick={props.buttonClick}
-          style={{ width: 1.0 }}>
-            <Text
-              style={[
-                {
-                  fontSize: 0.07,
-                  flexDirection: "column",
-                  alignItems: "stretch",
-                  justifyContent: "flex-start",
-                  layoutOrigin: [0.5, 0.5],
-                  fontWeight: "400",
-                  textAlign: "center",
-                  textAlignVertical: "center"
-                },
-                  textStyle,
-              ]}>
-                {text}
-            </Text>
-        </VrButton>
+      onClick={props.buttonClick}
+      style={{ width: 400 }}>
+        <Text
+          style={[
+            {
+              textAlign: "center",
+              color: "#f0fc",
+              fontSize: 50
+            },
+            textStyle,
+          ]}>
+            {text}
+        </Text>
+    </VrButton>
   )
 });

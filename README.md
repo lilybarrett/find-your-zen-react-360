@@ -2,7 +2,7 @@
 
 [Functional programming](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-functional-programming-7f218c68b3a0) is a hot topic in React development these days, and for good reason. At work, when I began using [Recompose](https://github.com/acdlite/recompose/blob/master/docs/API.md), "a React utility belt for function components and higher-order components" created by [Andrew Clark](https://github.com/acdlite), I liked the way Recompose instantly transformed the way I coded -- and thought about coding -- in React. Being function-friendly, Recompose increases the predictability and composability of React code and makes apps easier to test.
 
-Here, I"ll walk you through how I refactored a React app with Recompose and, as a bonus, give you an introduction to [React VR](https://facebook.github.io/react-vr/) along the way! This article assumes you have a working knowledge of React.
+Here, I"ll walk you through how I refactored a React app with Recompose and, as a bonus, give you an introduction to [React VR](https://facebook.github.io/react-360/) along the way! This article assumes you have a working knowledge of React.
 
 Note: As of May 2018, React VR was revamped and rebranded as [React 360](https://facebook.github.io/react-360/).
 
@@ -19,10 +19,10 @@ This content and more like it are on my blog at [lilydbarrett.com](http://lilydb
 React VR components include (among others):
 - [`View`](https://facebook.github.io/react-native/docs/view.html) - given to us by React Native, it"s used in place of the `div` elements React typically expects and maps to the view of whatever platform is running the code
 - [`Text`](https://facebook.github.io/react-native/docs/text.html) - given to us by React Native, it renders 3-D text
-- [`Pano`](https://facebook.github.io/react-vr/docs/pano.html) - displays 360-degree panoramas
-- [`DirectionalLight`](https://facebook.github.io/react-vr/docs/directionallight.html) - one of many types of light sources, it illuminates all objects equally from a given direction
-- [`Sphere`](https://facebook.github.io/react-vr/docs/sphere.html) - adds a 3-D sphere to your VR scene
-- [`VrButton`](https://facebook.github.io/react-vr/docs/vrbutton.html)
+- [`Pano`](https://facebook.github.io/react-360/docs/pano.html) - displays 360-degree panoramas
+- [`DirectionalLight`](https://facebook.github.io/react-360/docs/directionallight.html) - one of many types of light sources, it illuminates all objects equally from a given direction
+- [`Sphere`](https://facebook.github.io/react-360/docs/sphere.html) - adds a 3-D sphere to your VR scene
+- [`VrButton`](https://facebook.github.io/react-360/docs/vrbutton.html)
 
 You do not need any VR devices to get started with creating React VR apps.
 
@@ -33,13 +33,13 @@ You do not need any VR devices to get started with creating React VR apps.
 * Install the React VR CLI tool:
 
 ```
-$ npm i -g react-vr-cli
+$ npm i -g react-360-cli
 ```
 
 * Use it to create a new project:
 
 ```
-$ react-vr init FindYourZen
+$ react-360 init FindYourZen
 $ cd FindYourZen
 $ npm start
 ```
@@ -56,11 +56,11 @@ Take a look at the file structure.
 
 Delete the chess image from `static_assets` and replace it with some new images, including your "home" environment image, the one that appears when the app loads.
 
-A tip (Thank you, [Coding Artist](https://medium.com/coding-artist/learn-react-vr-chapter-1-hello-virtual-world-202241c0cb63)!): Search for "equirectangular" photos on Google. [Flickr](https://www.flickr.com/) is a particularly good source of free, Creative Commons-licensed, high-quality panoramic photos.
+A tip (Thank you, [Coding Artist](https://medium.com/coding-artist/learn-react-360-chapter-1-hello-virtual-world-202241c0cb63)!): Search for "equirectangular" photos on Google. [Flickr](https://www.flickr.com/) is a particularly good source of free, Creative Commons-licensed, high-quality panoramic photos.
 
 Create an `images` folder in your `static_assets` and move your images in there. Update the `Pano` component to refer to the home environment image for now.
 
-As you may have guessed by the name, the `Pano` component allows us to display panoramic, or "equirectangular," images, and uses the `asset` utility from `react-vr` to automatically look inside our `static_assets` folder for the image.
+As you may have guessed by the name, the `Pano` component allows us to display panoramic, or "equirectangular," images, and uses the `asset` utility from `react-360` to automatically look inside our `static_assets` folder for the image.
 
 #### Step 4
 
@@ -157,7 +157,7 @@ import {
   View,
   Sound,
   Image,
-} from "react-vr";
+} from "react-360";
 import zens from "./consts/zens.js";
 import { ZenButton, Mantra, Title, HomeButton } from "./components/index.js";
 
@@ -220,7 +220,7 @@ import {
   View,
   Sound,
   Image,
-} from "react-vr";
+} from "react-360";
 import zens from "./consts/zens.js";
 import { Audio, ZenButton, Mantra, Title, Menu, HomeButton } from "./components/index.js";
 import { withState, withHandlers, compose } from "recompose";
@@ -297,7 +297,7 @@ Now, for instance, I can create a `Menu` component that wraps the components I w
 import React from "react";
 import { hideIf } from "../providers/index.js";
 import { compose } from "recompose";
-import { View } from "react-vr";
+import { View } from "react-360";
 
 const hideMenu = hideIf((props) => props.selectedZen !== 4);
 
@@ -324,7 +324,7 @@ import {
   View,
   Sound,
   Image,
-} from "react-vr";
+} from "react-360";
 import zens from "./consts/zens.js";
 import { Audio, ZenButton, Mantra, Title, Menu, HomeButton } from "./components/index.js";
 import { withState, withHandlers, compose } from "recompose";
@@ -373,7 +373,7 @@ What about hiding the `Mantra` component when it doesn"t have a value in the `co
 ```javascript
 // components/mantra.js
 import React from "react";
-import { Text } from "react-vr";
+import { Text } from "react-360";
 import { hideIf } from "../providers/index.js";
 import { compose } from "recompose";
 
@@ -412,7 +412,7 @@ import {
   VrButton,
   Text,
   View,
-} from "react-vr";
+} from "react-360";
 import { compose } from "recompose";
 import { hideIf } from "../providers/index.js";
 
@@ -452,9 +452,9 @@ export default compose (
 ```javascript
 // components/audio.js
 import React from "react";
-import { Sound } from "react-vr";
+import { Sound } from "react-360";
 import { compose } from "recompose";
-import { asset } from "react-vr";
+import { asset } from "react-360";
 import { hideIf } from "../providers/index.js";
 
 const hideIfNoUrl = hideIf((props) => props.url === null || props.url === undefined || props.url.length === 0);
@@ -478,7 +478,7 @@ import {
   VrButton,
   Text,
   View,
-} from "react-vr";
+} from "react-360";
 import { hideIf } from "../providers/index.js";
 import { compose } from "recompose";
 
@@ -537,7 +537,7 @@ import {
   VrButton,
   Text,
   View,
-} from "react-vr";
+} from "react-360";
 import { compose } from "recompose";
 import { hideIfHome } from "../../providers/index.js";
 
@@ -578,7 +578,7 @@ import {
   VrButton,
   Text,
   View,
-} from "react-vr";
+} from "react-360";
 import BaseButton from "./base-button.js";
 
 const ZenButton = ({ text, buttonClick, selectedZen }) => {
@@ -607,7 +607,7 @@ import {
   VrButton,
   Text,
   View,
-} from "react-vr";
+} from "react-360";
 import BaseButton from "./base-button.js";
 
 const HomeButton = ({ text, buttonClick, selectedZen }) => {
@@ -699,11 +699,11 @@ Now, you can access the context anywhere you desire within your app. I was able 
 ```javascript
 // components/wrapped-pano.js
 import React from "react";
-import { Pano } from "react-vr";
+import { Pano } from "react-360";
 import { usingAppContext } from "../providers/index.js";
 import { Audio } from "../components/index.js";
 import zens from "../consts/zens.js";
-import { asset } from "react-vr";
+import { asset } from "react-360";
 
 export default usingAppContext(({ selectedZen }) => {
     return (
@@ -719,10 +719,10 @@ While I _could_ simply pass the same `selectedZen` prop down to `Audio` here, I"
 ```javascript
 // components/audio.js
 import React from "react";
-import { Sound } from "react-vr";
+import { Sound } from "react-360";
 import zens from "../consts/zens.js";
 import { compose } from "recompose";
-import { asset } from "react-vr";
+import { asset } from "react-360";
 import { hideIf, usingAppContext } from "../providers/index.js";
 
 const hideIfNoAudioUrl = hideIf(({ selectedZen }) => {
@@ -751,7 +751,7 @@ I can then compose `usingAppContext` with other components dependent on the `sel
 import React from "react";
 import { hideIf, usingAppContext } from "../providers/index.js";
 import { compose } from "recompose";
-import { View } from "react-vr";
+import { View } from "react-360";
 import { Zens, Title } from "../components/index.js";
 
 const hideMenu = hideIf(({ selectedZen }) => selectedZen !== 4);
@@ -771,7 +771,7 @@ export default compose(
 ```javascript
 // components/mantra.js
 import React from "react";
-import { Text } from "react-vr";
+import { Text } from "react-360";
 import zens from "../consts/zens.js";
 import { hideIfHome, usingAppContext } from "../providers/index.js";
 import { compose } from "recompose";
@@ -808,7 +808,7 @@ import {
   VrButton,
   Text,
   View,
-} from "react-vr";
+} from "react-360";
 import BaseButton from "./base-button.js";
 import { usingAppContext } from "../../providers/index.js";
 import zens from "../../consts/zens.js";
@@ -840,7 +840,7 @@ import { ZenButton } from "../components/index.js";
 import { usingAppContext } from "../providers/index.js";
 import zens from "../consts/zens.js";
 import { compose } from "recompose";
-import { View } from "react-vr";
+import { View } from "react-360";
 
 export default compose(
     usingAppContext
@@ -875,7 +875,7 @@ import {
   View,
   Sound,
   Image,
-} from "react-vr";
+} from "react-360";
 import zens from "./consts/zens.js";
 import { Zens, Mantra, Title, Menu, HomeButton, WrappedPano } from "./components/index.js";
 import { withState, withHandlers, compose } from "recompose";
@@ -917,8 +917,8 @@ Navigate to http://localhost:8081/vr/index.html.
 
 #### Useful React VR resources and tutorials
 
-* [React VR docs](https://facebook.github.io/react-vr/docs/getting-started.html)
-* [Coding Artist tutorials on React VR](https://medium.com/coding-artist/learn-react-vr-chapter-1-hello-virtual-world-202241c0cb63)
+* [React VR docs](https://facebook.github.io/react-360/docs/getting-started.html)
+* [Coding Artist tutorials on React VR](https://medium.com/coding-artist/learn-react-360-chapter-1-hello-virtual-world-202241c0cb63)
 
 #### Useful Recompose resources
 

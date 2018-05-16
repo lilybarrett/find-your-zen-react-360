@@ -3,7 +3,7 @@ import {
   VrButton,
   Text,
   View,
-} from "react-vr";
+} from "react-360";
 import BaseButton from "./base-button.js";
 
 const ZenButton = ({ text, buttonClick, selectedZen }) => {

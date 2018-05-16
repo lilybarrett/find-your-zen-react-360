@@ -1,9 +1,9 @@
 import React from "react";
-import { Pano } from "react-vr";
+import { Pano, Environment } from "react-360";
 import { usingAppContext } from "../providers/index.js";
 import { Audio } from "../components/index.js";
 import zens from "../consts/zens.js";
-import { asset } from "react-vr";
+import { asset } from "react-360";
 
 export default usingAppContext(({ selectedZen }) => {
     return (

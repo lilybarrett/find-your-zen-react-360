@@ -3,7 +3,7 @@ import { ZenButton } from "../components/index.js";
 import { usingAppContext } from "../providers/index.js";
 import zens from "../consts/zens.js";
 import { compose } from "recompose";
-import { View } from "react-vr";
+import { View, Environment, asset } from "react-360";
 
 export default compose(
     usingAppContext
@@ -15,7 +15,10 @@ export default compose(
                 <ZenButton
                     selectedZen={zen.id}
                     key={zen.id}
-                    buttonClick={() => zenClicked(zen.id)}
+                    buttonClick={() => {
+                        Environment.setBackgroundImage(asset(zens[zen.id - 1].image));
+                        zenClicked(zen.id);
+                    }}
                     text={zen.text}
                 />
             ))

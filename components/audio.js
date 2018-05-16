@@ -1,8 +1,8 @@
 import React from "react";
-import { Sound } from "react-vr";
+import { Sound } from "react-360";
 import zens from "../consts/zens.js";
 import { compose } from "recompose";
-import { asset } from "react-vr";
+import { asset } from "react-360";
 import { hideIf, usingAppContext } from "../providers/index.js";
 
 const hideIfNoAudioUrl = hideIf(({ selectedZen }) => {

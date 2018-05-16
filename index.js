@@ -8,7 +8,7 @@ import {
   View,
   Sound,
   Image,
-} from "react-vr";
+} from "react-360";
 import zens from "./consts/zens.js";
 import { Zens, Mantra, Title, Menu, HomeButton, WrappedPano } from "./components/index.js";
 import { withState, withHandlers, compose } from "recompose";
@@ -16,7 +16,7 @@ import { withAppContext } from "./providers/index.js";
 
 const MeditationApp = withAppContext(() => (
     <View>
-      <WrappedPano />
+      {/* <WrappedPano /> */}
       <HomeButton />
       <Mantra />
       <Menu>

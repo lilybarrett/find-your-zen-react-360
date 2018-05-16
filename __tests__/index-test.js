@@ -1,5 +1,5 @@
 import "react-native";
-import "react-vr";
+import "react-360";
 import React from "react";
 import Index from "../index.vr.js";
 

@@ -16,7 +16,6 @@ import { withAppContext } from "./providers/index.js";
 
 const MeditationApp = withAppContext(() => (
     <View>
-      {/* <WrappedPano /> */}
       <HomeButton />
       <Mantra />
       <Menu>

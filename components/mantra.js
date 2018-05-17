@@ -14,13 +14,9 @@ export default compose(
             style={{
               backgroundColor: "transparent",
               color: "lightcyan",
-              fontSize: 0.3,
+              fontSize: 50,
               fontWeight: "500",
-              layoutOrigin: [0.5, 0.5],
-              paddingLeft: 0.2,
-              paddingRight: 0.2,
               textAlign: "center",
-              textAlignVertical: "center",
               transform: [{translate: [0, 0, -3]}],
           }}>
             { text }

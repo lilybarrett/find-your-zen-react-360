@@ -16,8 +16,7 @@ export default usingAppContext(({ selectedZen, zenClicked }) => {
       <BaseButton
         selectedZen={selectedZen}
         buttonClick={() => {
-          Environment.setBackgroundImage(asset(zens[3].image));
-          zenClicked(4)
+          zenClicked(4);
         }}
         text={zens[3].text}
         textStyle={{

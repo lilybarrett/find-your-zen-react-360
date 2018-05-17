@@ -3,7 +3,8 @@ import { ZenButton } from "../components/index.js";
 import { usingAppContext } from "../providers/index.js";
 import zens from "../consts/zens.js";
 import { compose } from "recompose";
-import { View, Environment, asset } from "react-360";
+import { View, Environment, asset, NativeModules } from "react-360";
+const { AudioModule } = NativeModules;
 
 export default compose(
     usingAppContext
@@ -16,7 +17,6 @@ export default compose(
                     selectedZen={zen.id}
                     key={zen.id}
                     buttonClick={() => {
-                        Environment.setBackgroundImage(asset(zens[zen.id - 1].image));
                         zenClicked(zen.id);
                     }}
                     text={zen.text}

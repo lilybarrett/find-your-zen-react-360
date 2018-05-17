@@ -3,12 +3,14 @@ import { View, Text } from "react-360";
 
 const Title = () => {
     return (
-        <View>
+        <View style={{flexDirection: "column", height: 100, padding: 20}}>
             <Text
                 style={{
                 backgroundColor: "#29ECCE",
                 fontSize: 50,
+                fontWeight: "400",
                 textAlign: "center",
+                transform: [{translate: [0, 0, -3]}],
             }}>
                 Choose your zen
             </Text>

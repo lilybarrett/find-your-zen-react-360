@@ -15,7 +15,7 @@ const ZenButton = ({ text, buttonClick, selectedZen }) => {
       textStyle={{
         backgroundColor: "#29ECCE",
         color: "white",
-        marginTop: 0.03,
+        marginTop: 30,
         transform: [{translate: [0, 0, -1]}]
       }}
     />

@@ -11,7 +11,7 @@ export default compose(
     hideMenu,
 )(({ selectedZen, children }) => {
     return (
-        <View style={{marginTop: -0.2, height: 0.2}}>
+        <View style={{height: 100, padding: 20, transform: {translate: [0, 0, -2]}}}>
             { children }
         </View>
     )

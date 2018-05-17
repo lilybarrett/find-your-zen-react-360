@@ -18,9 +18,13 @@ export default compose(
         <Text
           style={[
             {
+              flexDirection: "column",
+              alignItems: "stretch",
+              justifyContent: "flex-start",
               textAlign: "center",
               color: "#f0fc",
-              fontSize: 50
+              fontSize: 30,
+              fontWeight: "400",
             },
             textStyle,
           ]}>

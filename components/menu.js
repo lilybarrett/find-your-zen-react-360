@@ -11,7 +11,13 @@ export default compose(
     hideMenu,
 )(({ selectedZen, children }) => {
     return (
-        <View style={{height: 100, padding: 20, transform: {translate: [0, 0, -2]}}}>
+        <View style={{
+            height: 100,
+            padding: 20,
+            flexDirection: "column",
+            alignItems: "center",
+            alignItems: "stretch",
+            justifyContent: "flex-start"}}>
             { children }
         </View>
     )

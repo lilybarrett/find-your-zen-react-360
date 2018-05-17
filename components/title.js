@@ -9,8 +9,11 @@ const Title = () => {
                 backgroundColor: "#29ECCE",
                 fontSize: 50,
                 fontWeight: "400",
+                flexDirection: "column",
+                alignItems: "center",
+                alignItems: "stretch",
+                justifyContent: "flex-start",
                 textAlign: "center",
-                transform: [{translate: [0, 0, -3]}],
             }}>
                 Choose your zen
             </Text>

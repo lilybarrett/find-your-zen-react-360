@@ -8,7 +8,6 @@ const withStateAndHandlers = compose(
     withState("selectedZen", "zenClicked", 4),
     withHandlers({
         zenClicked: (props) => (id, evt) => {
-            props.zenClicked(selectedZen => id);
             Environment.setBackgroundImage(asset(zens[id - 1].image));
             if (zens[id - 1].audio !== null && zens[id - 1].audio !== undefined) {
                 AudioModule.playEnvironmental({
@@ -16,6 +15,7 @@ const withStateAndHandlers = compose(
                     volume: 0.3,
                 });
             }
+            props.zenClicked(selectedZen => id);
         }
     }),
 )

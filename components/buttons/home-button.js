@@ -12,7 +12,7 @@ import zens from "../../consts/zens.js";
 
 export default usingAppContext(({ selectedZen, zenClicked }) => {
   return (
-    <View style={{marginBottom: 0.2}}>
+    <View style={{marginBottom: 30}}>
       <BaseButton
         selectedZen={selectedZen}
         buttonClick={() => {
@@ -20,10 +20,14 @@ export default usingAppContext(({ selectedZen, zenClicked }) => {
         }}
         text={zens[3].text}
         textStyle={{
-          backgroundColor: "white",
+          paddingRight: 20,
+          paddingLeft: 20,
+          marginTop: 100,
           color: "#29ECCE",
-          marginTop: 0.05,
-          transform: [{translate: [0, 0, -3]}]}}
+          backgroundColor: "white",
+          width: 200,
+          transform: [{translate: [400, 0, -3]}],
+          textAlign: "center"}}
       />
     </View>
   )

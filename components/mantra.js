@@ -17,7 +17,9 @@ export default compose(
               fontSize: 50,
               fontWeight: "500",
               textAlign: "center",
-              transform: [{translate: [0, 0, -3]}],
+              marginTop: 80,
+              width: 350,
+              transform: [{translate: [350, 0, -1]}]
           }}>
             { text }
         </Text>

@@ -9,10 +9,6 @@ const Title = () => {
                 backgroundColor: "#29ECCE",
                 fontSize: 50,
                 fontWeight: "400",
-                flexDirection: "column",
-                alignItems: "center",
-                alignItems: "stretch",
-                justifyContent: "flex-start",
                 textAlign: "center",
             }}>
                 Choose your zen

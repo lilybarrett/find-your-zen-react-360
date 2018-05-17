@@ -16,8 +16,7 @@ const ZenButton = ({ text, buttonClick, selectedZen }) => {
         backgroundColor: "#29ECCE",
         textAlign: "center",
         color: "white",
-        marginTop: 30,
-        transform: [{translate: [0, 0, -1]}]
+        marginTop: 30
       }}
     />
   )

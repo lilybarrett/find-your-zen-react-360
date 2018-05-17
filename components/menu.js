@@ -14,10 +14,7 @@ export default compose(
         <View style={{
             height: 100,
             padding: 20,
-            flexDirection: "column",
-            alignItems: "center",
-            alignItems: "stretch",
-            justifyContent: "flex-start"}}>
+            transform: [{translate: [300, 0, -1]}]}}>
             { children }
         </View>
     )

@@ -14,6 +14,8 @@ const withStateAndHandlers = compose(
                     source: asset(zens[id - 1].audio),
                     volume: 0.3,
                 });
+            } else {
+                AudioModule.stopEnvironmental();
             }
             props.zenClicked(selectedZen => id);
         }

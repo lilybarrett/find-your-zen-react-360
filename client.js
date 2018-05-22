@@ -3,7 +3,7 @@
 // If you want to modify your application, start in "index.vr.js"
 
 // Auto-generated content.
-import { ReactInstance } from "react-360-web";
+import { ReactInstance, Surface } from "react-360-web";
 
 function init(bundle, parent, options = {}) {
   const r360 = new ReactInstance(bundle, parent, {
@@ -12,9 +12,17 @@ function init(bundle, parent, options = {}) {
     ...options,
   });
 
+  const s = r360.getDefaultSurface();
+  s.setShape(Surface.SurfaceShape.Flat);
+
   r360.renderToSurface(
+    r360.createRoot("AppContent", { /* initial props */ }),
+    s,
+  );
+
+  r360.renderToLocation(
     r360.createRoot('MeditationApp', { /* initial props */ }),
-    r360.getDefaultSurface()
+    r360.getDefaultLocation(),
   );
 
   // Load the initial environment

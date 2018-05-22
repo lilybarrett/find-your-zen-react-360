@@ -4,6 +4,7 @@ import HomeButton from "./buttons/home-button.js";
 import Title from "./title.js";
 import Menu from "./menu.js";
 import Zens from "./zens.js";
+import AppContent from "./content.js";
 
 export {
     Mantra,
@@ -12,4 +13,5 @@ export {
     Title,
     Menu,
     Zens,
+    AppContent
 }

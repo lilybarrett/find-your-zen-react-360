@@ -26,7 +26,6 @@ export default usingAppContext(({ selectedZen, zenClicked }) => {
           color: "#29ECCE",
           backgroundColor: "white",
           width: 200,
-          transform: [{translate: [400, 0, -3]}],
           textAlign: "center"}}
       />
     </View>

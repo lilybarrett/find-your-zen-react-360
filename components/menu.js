@@ -13,8 +13,7 @@ export default compose(
     return (
         <View style={{
             height: 100,
-            padding: 20,
-            transform: [{translate: [300, 0, -1]}]}}>
+            padding: 20}}>
             { children }
         </View>
     )

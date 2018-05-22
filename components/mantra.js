@@ -13,13 +13,12 @@ export default compose(
         <Text
             style={{
               backgroundColor: "transparent",
-              color: "lightcyan",
+              color: "#29ECCE",
               fontSize: 50,
               fontWeight: "500",
               textAlign: "center",
               marginTop: 80,
-              width: 350,
-              transform: [{translate: [350, 0, -1]}]
+              width: 500,
           }}>
             { text }
         </Text>

@@ -1,6 +1,6 @@
-import { withContext, compose } from 'recompose';
-import * as PropTypes from 'prop-types';
-import withStateAndHandlers from './withStateAndHandlers';
+import { withContext, compose } from "recompose";
+import * as PropTypes from "prop-types";
+import withStateAndHandlers from "./withStateAndHandlers";
 
 export const AppPropTypes = {
     selectedZen: PropTypes.number,

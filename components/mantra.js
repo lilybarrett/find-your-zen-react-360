@@ -18,7 +18,7 @@ export default compose(
               fontWeight: "500",
               textAlign: "center",
               marginTop: 80,
-              width: 500,
+              width: 600,
           }}>
             { text }
         </Text>

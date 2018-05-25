@@ -15,7 +15,9 @@ import { withState, withHandlers, compose } from "recompose";
 import { withAppContext } from "./providers/index.js";
 
 const MeditationApp = withAppContext(() => (
-    <View>
+    <View style={{transform: [
+      {translate: [0, 0, -2]}
+    ]}}>
       <AppContent />
     </View>
 ));

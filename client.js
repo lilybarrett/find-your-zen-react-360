@@ -12,12 +12,9 @@ function init(bundle, parent, options = {}) {
     ...options,
   });
 
-  const s = r360.getDefaultSurface();
-  s.setShape(Surface.SurfaceShape.Flat);
-
   r360.renderToSurface(
     r360.createRoot("AppContent", { /* initial props */ }),
-    s,
+    r360.getDefaultSurface()
   );
 
   r360.renderToLocation(

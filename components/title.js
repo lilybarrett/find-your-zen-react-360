@@ -10,6 +10,8 @@ const Title = () => {
                 fontSize: 50,
                 fontWeight: "400",
                 textAlign: "center",
+                paddingLeft: 20,
+                paddingRight: 20,
             }}>
                 Choose your zen
             </Text>

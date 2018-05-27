@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  VrButton,
-  Text,
-  View,
-} from "react-360";
-import BaseButton from "./base-button.js";
+import { BaseButton } from "../../../components/index.js";
 
 const ZenButton = ({ text, buttonClick, selectedZen }) => {
   return (

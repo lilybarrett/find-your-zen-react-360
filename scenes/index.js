@@ -1,5 +1,5 @@
-import HomeEnvironment from "./home-environment/index.js";
-import ZenEnvironment from "./zen-environment/index.js";
+import HomeEnvironment from "./home-environment";
+import ZenEnvironment from "./zen-environment";
 
 export {
     HomeEnvironment,

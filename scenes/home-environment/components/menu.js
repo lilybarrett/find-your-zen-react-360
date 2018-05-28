@@ -1,5 +1,5 @@
 import React from "react";
-import { hideIf, usingAppContext } from "../../../providers/index.js";
+import { hideIf, usingAppContext } from "../../../providers";
 import { compose } from "recompose";
 import { View } from "react-360";
 

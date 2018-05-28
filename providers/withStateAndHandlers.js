@@ -2,7 +2,7 @@ import React from "react";
 import { withState, withHandlers, compose } from "recompose";
 import { Environment, asset, NativeModules } from "react-360";
 const { AudioModule } = NativeModules;
-import zens from "../consts/zens.js";
+import { zens } from "../consts";
 
 const withStateAndHandlers = compose(
     withState("selectedZen", "zenClicked", 4),

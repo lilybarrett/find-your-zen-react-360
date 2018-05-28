@@ -1,7 +1,7 @@
 import React from "react";
-import { ZenButton } from "./index.js";
-import { usingAppContext } from "../../../providers/index.js";
-import zens from "../../../consts/zens.js";
+import ZenButton from "./zen-button";
+import { usingAppContext } from "../../../providers";
+import { zens } from "../../../consts";
 import { compose } from "recompose";
 import { View } from "react-360";
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { BaseButton } from "../../../components/index.js";
+import { BaseButton } from "../../../components";
 
 const ZenButton = ({ text, buttonClick, selectedZen }) => {
   return (

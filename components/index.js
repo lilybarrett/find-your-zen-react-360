@@ -1,5 +1,5 @@
-import BaseButton from "./base-button.js";
-import AppContent from "./content.js";
+import BaseButton from "./base-button";
+import AppContent from "./content";
 
 export {
     BaseButton,

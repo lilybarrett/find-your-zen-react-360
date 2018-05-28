@@ -3,8 +3,8 @@ import {
   AppRegistry,
   View,
 } from "react-360";
-import { AppContent } from "./components/index.js";
-import { withAppContext } from "./providers/index.js";
+import { AppContent } from "./components";
+import { withAppContext } from "./providers";
 
 const MeditationApp = withAppContext(() => (
     <View style={{

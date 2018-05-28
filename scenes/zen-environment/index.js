@@ -1,6 +1,6 @@
 import React from "react";
 import { View } from "react-360";
-import { Mantra, HomeButton } from "./components/index.js";
+import { Mantra, HomeButton } from "./components";
 
 const ZenEnvironment = () => (
     <View style={{

@@ -1,5 +1,5 @@
-import HomeButton from "./home-button.js";
-import Mantra from "./mantra.js";
+import HomeButton from "./home-button";
+import Mantra from "./mantra";
 
 export {
     HomeButton,

@@ -1,8 +1,8 @@
-import hideIf from "./hideIf.js";
-import hideIfHome from "./hideIfHome.js";
-import usingAppContext from "./usingAppContext.js";
-import withAppContext from "./withAppContext.js";
-import withStateAndHandlers from "./withStateAndHandlers.js";
+import hideIf from "./hideIf";
+import hideIfHome from "./hideIfHome";
+import usingAppContext from "./usingAppContext";
+import withAppContext from "./withAppContext";
+import withStateAndHandlers from "./withStateAndHandlers";
 
 export {
     hideIf,

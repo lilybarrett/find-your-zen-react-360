@@ -3,9 +3,9 @@ import {
   VrButton,
   View,
 } from "react-360";
-import { BaseButton } from "../../../components/index.js";
-import { usingAppContext } from "../../../providers/index.js";
-import zens from "../../../consts/zens.js";
+import { BaseButton } from "../../../components";
+import { usingAppContext } from "../../../providers";
+import { zens } from "../../../consts";
 
 export default usingAppContext(({ selectedZen, zenClicked }) => {
   return (

@@ -1,6 +1,6 @@
 import React from "react";
 import { View } from "react-360";
-import { Title, Menu, Zens } from "./components/index.js";
+import { Title, Menu, Zens } from "./components";
 
 const HomeEnvironment = () => (
     <View>

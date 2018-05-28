@@ -4,7 +4,7 @@ import {
   Text,
 } from "react-360";
 import { compose } from "recompose";
-import { hideIfHome } from "../providers/index.js";
+import { hideIfHome } from "../providers";
 
 export default compose(
   hideIfHome,

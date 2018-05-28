@@ -1,7 +1,7 @@
 import React from "react";
 import { View,Text } from "react-360";
-import zens from "../../../consts/zens.js";
-import { hideIfHome, usingAppContext } from "../../../providers/index.js";
+import { zens } from "../../../consts";
+import { hideIfHome, usingAppContext } from "../../../providers";
 import { compose } from "recompose";
 
 export default compose(

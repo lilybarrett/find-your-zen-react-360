@@ -4,7 +4,8 @@ import {
   Text,
 } from "react-360";
 import { compose } from "recompose";
-import { hideIfHome } from "../providers";
+import { hideIfHome } from "../../providers";
+import style from "./style";
 
 export default compose(
   hideIfHome,
@@ -13,16 +14,10 @@ export default compose(
   return (
     <VrButton
       onClick={props.buttonClick}
-      style={{
-        width: 400
-      }}>
+      style={style.button}>
         <Text
           style={[
-            {
-              color: "#f0fc",
-              fontSize: 30,
-              fontWeight: "400",
-            },
+            style.textDefault,
             textStyle,
           ]}>
             {text}

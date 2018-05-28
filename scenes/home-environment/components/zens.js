@@ -1,10 +1,9 @@
 import React from "react";
-import { ZenButton } from "../components/index.js";
-import { usingAppContext } from "../providers/index.js";
-import zens from "../consts/zens.js";
+import { ZenButton } from "./index.js";
+import { usingAppContext } from "../../../providers/index.js";
+import zens from "../../../consts/zens.js";
 import { compose } from "recompose";
-import { View, Environment, asset, NativeModules } from "react-360";
-const { AudioModule } = NativeModules;
+import { View } from "react-360";
 
 export default compose(
     usingAppContext

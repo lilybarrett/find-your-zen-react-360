@@ -18,12 +18,12 @@ function init(bundle, parent, options = {}) {
   );
 
   r360.renderToLocation(
-    r360.createRoot('MeditationApp', { /* initial props */ }),
+    r360.createRoot("MeditationApp", { /* initial props */ }),
     r360.getDefaultLocation(),
   );
 
   // Load the initial environment
-  r360.compositor.setBackground(r360.getAssetURL('images/homebase.png'));
+  r360.compositor.setBackground(r360.getAssetURL("images/homebase.png"));
 }
 
 window.React360 = {init};

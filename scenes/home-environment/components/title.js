@@ -6,14 +6,14 @@ const Title = () => {
         <View style={{flexDirection: "column", height: 100, padding: 20}}>
             <Text
                 style={{
-                backgroundColor: "#29ECCE",
-                fontSize: 50,
-                fontWeight: "400",
-                textAlign: "center",
-                paddingLeft: 20,
-                paddingRight: 20,
-            }}>
-                Choose your zen
+                    backgroundColor: "#29ECCE",
+                    fontSize: 50,
+                    fontWeight: "400",
+                    textAlign: "center",
+                    paddingLeft: 20,
+                    paddingRight: 20,
+                }}>
+                Find your zen
             </Text>
         </View>
     )

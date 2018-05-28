@@ -2,10 +2,10 @@
 
 The project I'll guide you through is a virtual reality app -- built using React 360 -- which allows the user to choose his or her immersive meditation environment, each of which comes with its own mantra inspired by the very excellent show ["The Good Place."](https://www.nbc.com/the-good-place?nbc=1) In case you need it for reference, my final source code is [here](https://github.com/lilybarrett/find-your-zen).
 
-This content and more like it -- including an introduction to Recompose, which I used for state management here -- are on my blog at [lilydbarrett.com](http://lilydbarrett.com/).
+This content and more like it -- including an introduction to [Recompose](https://github.com/acdlite/recompose), which I used for state management here -- are on my blog at [lilydbarrett.com](http://lilydbarrett.com/).
 
 ### About React 360
-* Revamped and rebranded version of React VR
+* Revamped and rebranded version of [React VR](https://techcrunch.com/2017/04/18/facebook-launches-react-vr-a-new-javascript-framework-for-building-basic-vr-apps/)
 * Open source, built by [Facebook](https://github.com/facebook)
 * Incorporates [Three.js](https://threejs.org/), a 3-D JavaScript library; [React Native](https://facebook.github.io/react-native/) mobile elements; and [Web VR](https://webvr.info/), responsible for allowing us to view VR experiences across different browsers, including web
 * Enables [Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/) for ease with fitting content to different browsers/screens
@@ -60,7 +60,7 @@ r360.compositor.setBackground(r360.getAssetURL('360_world.jpg'));
 
 This line of code, which immediately sets the background image when the app is first mounted, uses the `asset` utility from `react-360` to automatically look inside our `static_assets` folder for the correct image. 
 
-That's all well and good, but keep in mind you'll eventually want to change the image based on which environment the user selects. You can handle dynamic images from within a React event by using `react-360`'s `Environment` module. We'll go more in depth about this later, but for now, I'll provide an example:
+That's all well and good, but keep in mind you'll eventually want to change the image based on which environment the user selects. You can handle dynamic images from within a React event by using `react-360`'s `Environment` module. Example:
 
 ```javascript
 Environment.setBackgroundImage(asset(someImage));
@@ -74,7 +74,7 @@ Note that any text in the application needs to be explicitly wrapped inside a `T
 
 #### Managing State 
 
-Now, you"ll need to add logic for updating the user's environment based on which option they choose by clicking on a `VrButton` component. I'll leave this open-ended as it's still just React: You can use local state, Redux, Mobx, whatever. (I chose to use Recompose).
+Now, you"ll need to add logic for updating the user's environment based on which option they choose by clicking on a `VrButton` component. I'll leave this open-ended as it's still just React: You can use local state, Redux, Mobx, whatever. I chose to use Recompose. 
 
 FYI, I wound up putting my data for each environment in a `consts/zens.js` file:
 
@@ -118,10 +118,6 @@ After downloading the sounds -- many of which have large `.wav` files -- you"ll 
 For playing audio, we'll use the `AudioModule` Native Module. Its `playEnvironmental` method allows us to provide a path (to the audio our assets folder) and a volume at which to play said audio at a looping pace; Once the audio file stops playing, it'll start again.
 
 One thing to keep in mind is that you'll need to tell your application when to _stop_ playing a particular audio file when you switch scenes. (Otherwise it'll keep playing in an environment where it's not welcome! You can't listen to Parisian church bells on a Hawaiian beach!) You can do this via the `AudioModule`'s `stopEnvironmental` method.
-
-#### Debugging React 360
-
-When you `Inspect Element`, you"ll see that React 360 bundles all its files into one giant blob that isn"t super easy to grok. Fortunately, because it supports [sourcemaps](https://trackjs.com/blog/debugging-with-sourcemaps/), we can still access the original files, use `debugger`, etc.
 
 #### Mounting the app 
 
@@ -265,6 +261,10 @@ const ZenButton = ({ text, buttonClick, selectedZen }) => {
 
 export default ZenButton;
 ```
+
+#### Debugging React 360
+
+When you `Inspect Element`, you"ll see that React 360 bundles all its files into one giant blob that isn"t super easy to grok. Fortunately, because it supports [sourcemaps](https://trackjs.com/blog/debugging-with-sourcemaps/), we can still access the original files, use `debugger`, etc.
 
 #### Viewing the finished demo code
 

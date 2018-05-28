@@ -1,5 +1,6 @@
 import React from "react";
-import { BaseButton } from "../../../components";
+import { BaseButton } from "../../../../components";
+import style from "./style";
 
 const ZenButton = ({ text, buttonClick, selectedZen }) => {
   return (
@@ -7,12 +8,7 @@ const ZenButton = ({ text, buttonClick, selectedZen }) => {
       text={text}
       selectedZen={selectedZen}
       buttonClick={buttonClick}
-      textStyle={{
-        backgroundColor: "#29ECCE",
-        textAlign: "center",
-        color: "white",
-        marginTop: 30
-      }}
+      textStyle={style.text}
     />
   )
 }

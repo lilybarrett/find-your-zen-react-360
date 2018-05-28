@@ -7,6 +7,7 @@ const ZenEnvironment = () => (
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
+        transform: [{translate: [150, 0, -100]}],
         marginTop: 80,
     }}>
         <HomeButton />

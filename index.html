@@ -7,13 +7,13 @@
   <body>
     <div id="container" />
     <!-- When you"re ready to deploy your app, update this line to point to your compiled client.bundle.js -->
-    <script src="./client.bundle?platform=vr"></script>
+    <script src="./client.bundle.js"></script>
     <script>
       // Initialize the React VR application
       React360.init(
         // When you"re ready to deploy your app, update this line to point to
         // your compiled index.bundle.js
-        "index.bundle?platform=vr&dev=true",
+        "index.bundle.js",
         document.getElementById("container"),
         {
           assetRoot: "static_assets/",
